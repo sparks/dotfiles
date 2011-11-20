@@ -1,0 +1,21 @@
+[apply]
+	whitespace = fix
+[user]
+	name = Severin Smith
+	email = info@smallbutdigital.com
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	lg = log --oneline --decorate
+[github]
+	user = sparks
+	token = e8a17a173be3b99a1aadd8706207f954
+[gist]
+	browse = yes
+	private = no

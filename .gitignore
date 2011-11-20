@@ -1,0 +1,16 @@
+*
+
+!.bash_profile
+!.bashrc
+!.gitconfig
+!.gitignore
+!.osx
+!.plan
+!.project
+!.screenrc
+!.tmux.conf
+!.vimrc
+
+!.ssh
+.ssh/*
+!.ssh/config
