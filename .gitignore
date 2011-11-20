@@ -11,6 +11,6 @@
 !.tmux.conf
 !.vimrc
 
-!.ssh
-.ssh/*
-!.ssh/config
+#!.ssh
+#.ssh/*
+#!.ssh/config
