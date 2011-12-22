@@ -35,7 +35,7 @@ export GOBIN=/usr/local/Cellar/go/HEAD/bin
 export GOSRC=/usr/local/Cellar/go/HEAD/src
 
 #BREW
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/go/HEAD/bin:$PATH
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/go/HEAD/bin:$PATH
 
 #SVN
 export SVN_MERGE=fmdiff
