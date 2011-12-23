@@ -10,6 +10,7 @@
 !.screenrc
 !.tmux.conf
 !.vimrc
+!.tm_properties
 
 #!.ssh
 #.ssh/*
