@@ -30,12 +30,12 @@ export PS1="\[\e[1;31m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;31
 export PS2="\[\e[1:31m\] >\[\e[0m\] "
 
 #GO
-export GOROOT=/usr/local/Cellar/go/HEAD
-export GOBIN=/usr/local/Cellar/go/HEAD/bin
-export GOSRC=/usr/local/Cellar/go/HEAD/src
+# export GOROOT=/usr/local/Cellar/go/HEAD
+# export GOBIN=/usr/local/Cellar/go/HEAD/bin
+# export GOSRC=/usr/local/Cellar/go/HEAD/src
 
 #BREW
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/go/HEAD/bin:$PATH
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
 #SVN
 export SVN_MERGE=fmdiff
