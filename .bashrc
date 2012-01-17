@@ -34,12 +34,26 @@ export PS2="\[\e[1:31m\] >\[\e[0m\] "
 # export GOBIN=/usr/local/Cellar/go/HEAD/bin
 # export GOSRC=/usr/local/Cellar/go/HEAD/src
 
+#ARM
+export PATH=/usr/local/arm-cs-tools/bin:$PATH
+
 #BREW
 export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
 #SVN
 export SVN_MERGE=fmdiff
 
+#TMUX
+function muxx() {
+	tmux new-session -d -s muxx -n scratch
+	tmux split-window -p 20 python
+	tmux split-window -h -p 20
+	tmux clock-mode -t scratch.2
+	tmux attach-session -t muxx
+}
+
+#BASH OPTIONS
+shopt -s cdspell
 shopt -s nocaseglob
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
