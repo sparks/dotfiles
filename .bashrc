@@ -2,10 +2,14 @@
 
 if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
 	#Crosspack MAN Files
-	export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
+	if [ -d /usr/local/CrossPack-AVR/man ]; then
+		export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
+	fi
 
 	#ARM Compile Tools
-	export PATH=/usr/local/arm-cs-tools/bin:$PATH
+	if [ -d /usr/local/arm-cs-tools/bin ]; then
+	  export PATH=/usr/local/arm-cs-tools/bin:$PATH
+	fi
 
 	#XTerm (Octave and GnuPlot)
 	export GNUTERM='x11'
