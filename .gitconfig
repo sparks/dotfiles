@@ -15,7 +15,6 @@
 	lg = log --oneline --decorate
 [github]
 	user = sparks
-	token = e8a17a173be3b99a1aadd8706207f954
 [gist]
 	browse = yes
 	private = no
