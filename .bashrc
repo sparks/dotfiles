@@ -84,6 +84,8 @@ alias ls='ls -hlG'
 alias l='ls -hlG'
 alias la='ls -ahlG'
 
+alias vi='vim'
+
 alias ..='cd ..'
 alias c='clear'
 alias p='cd ~/Projects/'
