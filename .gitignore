@@ -11,6 +11,7 @@
 !.tmux.conf
 !.vimrc
 !.tm_properties
+!.timed
 
 #!.ssh
 #.ssh/*
