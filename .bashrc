@@ -57,8 +57,13 @@ function parse_git_branch() {
 	fi
 }
 
-export PS1="\[\e[1;31m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;31m\]\[\e[1;31m\]]\[\e[0m\] "
-export PS2="\[\e[1:31m\] >\[\e[0m\] "
+if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
+	export PS1="\[\e[1;31m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;31m\]]\[\e[0m\] "
+	export PS2="\[\e[1:31m\] >\[\e[0m\] "
+else
+	export PS1="\[\e[1;36m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;36m\]]\[\e[0m\] "
+	export PS2="\[\e[1:36m\] >\[\e[0m\] "
+fi
 
 #--------- Handy Functions --------#
 
