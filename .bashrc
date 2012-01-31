@@ -8,7 +8,7 @@ if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
 
 	#ARM Compile Tools
 	if [ -d /usr/local/arm-cs-tools/bin ]; then
-	  export PATH=/usr/local/arm-cs-tools/bin:$PATH
+		export PATH=/usr/local/arm-cs-tools/bin:$PATH
 	fi
 
 	#XTerm (Octave and GnuPlot)
@@ -46,11 +46,15 @@ fi
 #--------- Prompt --------#
 
 function parse_git_dirty() {
-	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+	if [ `which git` ]; then
+		[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+	fi
 }
 
 function parse_git_branch() {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1$(parse_git_dirty)/"
+	if [ `which git` ]; then
+		git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1$(parse_git_dirty)/"
+	fi
 }
 
 export PS1="\[\e[1;31m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;31m\]\[\e[1;31m\]]\[\e[0m\] "
