@@ -25,9 +25,17 @@ if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
 	alias wsubl='subl -w'
 
 	alias eagle='/Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&'
+
+	alias ls='ls -hlG'
+	alias l='ls -hlG'
+	alias la='ls -ahlG'
 else
 	#EDITOR
 	export EDITOR='vi'
+
+	alias ls='ls -hl --color'
+	alias l='ls -hl --color' 
+	alias la='ls -ahl --color'
 fi
 
 
@@ -79,10 +87,6 @@ function muxx() {
 
 shopt -s cdspell
 shopt -s nocaseglob
-
-alias ls='ls -hlG'
-alias l='ls -hlG'
-alias la='ls -ahlG'
 
 alias vi='vim'
 
