@@ -18,7 +18,7 @@ if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
 	export SVN_MERGE=fmdiff
 
 	#Editor
-	export EDITOR='mate -w'
+	export EDITOR='subl -w'
 
 	#Mac Aliases
 	alias wmate='mate -w'
@@ -94,9 +94,10 @@ alias ..='cd ..'
 alias c='clear'
 alias p='cd ~/Projects/'
 
-#AVR dude
+#avrdude
 alias usbasp='avrdude -c usbasp -P usb'
 alias usbtiny='avrdude -c usbtiny -P usb'
+alias mk2='avrdude -c avrispmkII -P usb'
 
 #Screen
 alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
