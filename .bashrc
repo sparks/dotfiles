@@ -38,6 +38,8 @@ else
 	alias la='ls -ahl --color'
 fi
 
+export AVR_ISP='dragon_isp'
+
 
 #--------- Homebrew stuff --------#
 
