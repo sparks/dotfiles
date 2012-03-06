@@ -100,6 +100,7 @@ alias p='cd ~/Projects/'
 alias usbasp='avrdude -c usbasp -P usb'
 alias usbtiny='avrdude -c usbtiny -P usb'
 alias mk2='avrdude -c avrispmkII -P usb'
+alias dragon='avrdude -c dragon_isp -P usb'
 
 #Screen
 alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
