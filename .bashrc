@@ -1,6 +1,6 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
+if [ `uname` == 'Darwin' ]; then
 	#Crosspack MAN Files
 	if [ -d /usr/local/CrossPack-AVR/man ]; then
 		export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
@@ -15,35 +15,31 @@ if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
 	export GNUTERM='x11'
 
 	#SVN diff/merge tool
-	export SVN_MERGE=fmdiff
-
-	#Editor
-	export EDITOR='subl -w'
+	if [ `command -v fmdiff` ]; then
+		export SVN_MERGE=fmdiff
+	fi
 
 	#Mac Aliases
-	alias wmate='mate -w'
-	alias wsubl='subl -w'
-
-	alias eagle='/Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&'
+	if [ `command -v /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE` ]; then
+		alias eagle='/Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&'
+	fi
 
 	alias ls='ls -hlG'
 	alias l='ls -hlG'
 	alias la='ls -ahlG'
 else
-	#EDITOR
-	export EDITOR='vi'
-
 	alias ls='ls -hl --color'
 	alias l='ls -hl --color' 
 	alias la='ls -ahl --color'
 fi
 
+export EDITOR='vi'
 export AVR_ISP='usbasp'
 
 
 #--------- Homebrew stuff --------#
 
-if [ `which brew` ]; then
+if [ `command -v brew` ]; then
 	#Brew path settings (should be last to alter the PATH
 	export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
@@ -56,13 +52,13 @@ fi
 #--------- Prompt --------#
 
 function parse_git_dirty() {
-	if [ `which git` ]; then
+	if [ `command -v git` ]; then
 		[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 	fi
 }
 
 function parse_git_branch() {
-	if [ `which git` ]; then
+	if [ `command -v git` ]; then
 		git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1$(parse_git_dirty)/"
 	fi
 }
@@ -74,16 +70,6 @@ else
 	export PS1="\[\e[1;36m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;36m\]]\[\e[0m\] "
 	export PS2="\[\e[1:36m\] >\[\e[0m\] "
 fi
-
-#--------- Handy Functions --------#
-
-function muxx() {
-	tmux new-session -d -s muxx -n scratch
-	tmux split-window -p 20 python
-	tmux split-window -h -p 20
-	tmux clock-mode -t scratch.2
-	tmux attach-session -t muxx
-}
 
 #--------- Generic Aliases and Bash Stuff --------#
 
@@ -97,10 +83,12 @@ alias c='clear'
 alias p='cd ~/Projects/'
 
 #avrdude
-alias usbasp='avrdude -c usbasp -P usb'
-alias usbtiny='avrdude -c usbtiny -P usb'
-alias mk2='avrdude -c avrispmkII -P usb'
-alias dragon='avrdude -c dragon_isp -P usb'
+if [ `command -v avrdude` ]; then
+	alias usbasp='avrdude -c usbasp -P usb'
+	alias usbtiny='avrdude -c usbtiny -P usb'
+	alias mk2='avrdude -c avrispmkII -P usb'
+	alias dragon='avrdude -c dragon_isp -P usb'
+fi
 
 #Screen
 alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
