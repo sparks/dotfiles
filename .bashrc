@@ -34,7 +34,7 @@ else
 fi
 
 export EDITOR='vi'
-export AVR_ISP='usbasp'
+export AVR_ISP='dragon_isp'
 
 
 #--------- Homebrew stuff --------#
