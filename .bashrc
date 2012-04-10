@@ -24,6 +24,10 @@ if [ `uname` == 'Darwin' ]; then
 		alias eagle='/Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&'
 	fi
 
+	if [ `command -v subl` ]; then
+		alias s='subl'
+	fi
+
 	alias ls='ls -hlG'
 	alias l='ls -hlG'
 	alias la='ls -ahlG'
