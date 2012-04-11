@@ -43,10 +43,13 @@ export AVR_ISP='dragon_isp'
 
 #--------- Homebrew stuff --------#
 
+#Brew path settings (should be last to alter the PATH
+export PATH=/usr/local/bin:$PATH
+
 if [ `command -v brew` ]; then
 	#Brew path settings (should be last to alter the PATH
-	export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
-
+	export PATH=/usr/local/share/python:/usr/local/sbin:$PATH
+	
 	#Brew bash_completion
 	if [ -f `brew --prefix`/etc/bash_completion ]; then
 		. `brew --prefix`/etc/bash_completion
