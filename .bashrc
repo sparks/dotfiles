@@ -56,6 +56,10 @@ if [ `command -v brew` ]; then
 	fi
 fi
 
+# if [ -n "$TMUX" ]; then
+# 	f(){ if [ "$PWD" != "$LPWD" ];then LPWD="$PWD"; tmux rename-window ${PWD//*\//}; fi }; export PROMPT_COMMAND=f;
+# fi
+
 #--------- Prompt --------#
 
 function parse_git_dirty() {
