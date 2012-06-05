@@ -31,30 +31,38 @@ if [ `uname` == 'Darwin' ]; then
 	alias ls='ls -hlG'
 	alias l='ls -hlG'
 	alias la='ls -ahlG'
+	
+	#Screen
+	alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
+	
+	#--------- Homebrew stuff --------#
+
+	#Brew path settings (should be last to alter the PATH
+	export PATH=/usr/local/bin:$PATH
+
+	if [ `command -v brew` ]; then
+		#Brew path settings (should be last to alter the PATH
+		export PATH=/usr/local/share/python:/usr/local/sbin:$PATH
+
+		#Brew bash_completion
+		if [ -f `brew --prefix`/etc/bash_completion ]; then
+			. `brew --prefix`/etc/bash_completion
+		fi
+	fi
 else
 	alias ls='ls -hl --color'
 	alias l='ls -hl --color' 
 	alias la='ls -ahl --color'
+
+	if [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
 export EDITOR='vi'
 export AVR_ISP='dragon_isp'
 
-
-#--------- Homebrew stuff --------#
-
-#Brew path settings (should be last to alter the PATH
-export PATH=/usr/local/bin:$PATH
-
-if [ `command -v brew` ]; then
-	#Brew path settings (should be last to alter the PATH
-	export PATH=/usr/local/share/python:/usr/local/sbin:$PATH
-	
-	#Brew bash_completion
-	if [ -f `brew --prefix`/etc/bash_completion ]; then
-		. `brew --prefix`/etc/bash_completion
-	fi
-fi
+#-------- TMUX ----------#
 
 # if [ -n "$TMUX" ]; then
 # 	f(){ if [ "$PWD" != "$LPWD" ];then LPWD="$PWD"; tmux rename-window ${PWD//*\//}; fi }; export PROMPT_COMMAND=f;
@@ -100,9 +108,6 @@ if [ `command -v avrdude` ]; then
 	alias mk2='avrdude -c avrispmkII -P usb'
 	alias dragon='avrdude -c dragon_isp -P usb'
 fi
-
-#Screen
-alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
 
 #--------- ASCII Art --------#
 
