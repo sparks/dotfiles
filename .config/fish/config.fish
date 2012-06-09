@@ -52,9 +52,7 @@ end;
 
 function parse_git_branch
 	set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {print $2}');
-	if test -n "$branch";
-		printf "(%s)" $branch;
-	end;
+	printf "%s" $branch;
 end
 
 set prompt_bracket_color yellow
@@ -71,14 +69,25 @@ end;
 function fish_prompt;
 	set_color -o $prompt_bracket_color;
 	printf "[";
+
 	set_color normal;
 	set_color white;
-	printf "%s " (prompt_pwd);
+	printf "%s" (prompt_pwd);
+
 	set_color yellow
-	printf "%s" (parse_git_branch)
-	printf "%s" (parse_git_dirty)
+	set -l branch (parse_git_branch)
+	set -l dirty (parse_git_dirty)
+	if test -n "$branch";
+		printf " (%s)%s" $branch $dirty;
+	else;
+		if test -n "$dirty";
+			printf " %s" $dirty;
+		end;
+	end;
+
 	set_color -o $prompt_bracket_color;
 	printf "] ";
+
 	set_color normal;
 end;
 
