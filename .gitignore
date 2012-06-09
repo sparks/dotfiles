@@ -12,6 +12,13 @@
 !.vimrc
 !.tm_properties
 !.timed
+!.config
+!.config/fish
+!.config/fish/*
+!.config/fish/completions
+!.config/fish/completions/*
+.config/fish/fishd.*
+.config/fish/fish_history
 
 #!.ssh
 #.ssh/*
