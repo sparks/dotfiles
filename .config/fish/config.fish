@@ -44,17 +44,24 @@ else;
 end;
 
 #--------- Prompt --------#
-function parse_git_dirty;
-	git diff --quiet HEAD ^&-;
-	if test $status = 1;
+function parse_git_dirty -d "Return a marker if inside a dirty git repo";
+	set -l result (git status --porcelain ^&-);
+	if test -n "$result";
 		printf "☐";
 	end;
 end;
 
-function parse_git_branch
+function parse_git_branch -d "Return branch name if inside a git repo and the master branch is not checked out";
 	set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {print $2}');
 	printf "%s" $branch;
-end
+end;
+
+function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
+	set -l result (svn status ^&-);
+	if test -n "$result";
+		printf "■";
+	end;
+end;
 
 set prompt_bracket_color yellow
 
@@ -76,13 +83,23 @@ function fish_prompt;
 	printf "%s" (prompt_pwd);
 
 	set_color yellow
-	set -l branch (parse_git_branch)
-	set -l dirty (parse_git_dirty)
-	if test -n "$branch";
-		printf " (%s)%s" $branch $dirty;
+
+	if test -d ./.svn;
+		set -l svn_dirty (parse_svn_dirty)
+
+		if test -n "$svn_dirty";
+			printf " %s" $svn_dirty;
+		end;
 	else;
-		if test -n "$dirty";
-			printf " %s" $dirty;
+		set -l git_branch (parse_git_branch)
+		set -l git_dirty (parse_git_dirty)
+
+		if test -n "$git_branch";
+			printf " (%s)%s" $git_branch $dirty;
+		else;
+			if test -n "$git_dirty";
+				printf " %s" $git_dirty;
+			end;
 		end;
 	end;
 
