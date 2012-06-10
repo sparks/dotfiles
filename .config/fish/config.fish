@@ -3,20 +3,20 @@
 if test (uname) = "Darwin";
 	#Crosspack MAN Files
 	if test -d /usr/local/CrossPack-AVR/man;
-		set MANPATH /usr/local/CrossPack-AVR/man $MANPATH
+		set MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
 	end;
 
 	#ARM Compile Tools
 	if test -d /usr/local/arm-cs-tools/bin;
-		set PATH /usr/local/arm-cs-tools/bin $PATH
+		set PATH /usr/local/arm-cs-tools/bin $PATH;
 	end;
 
 	#XTerm (Octave and GnuPlot)
-	set GNUTERM 'x11'
+	set GNUTERM 'x11';
 
 	#SVN diff/merge tool
 	if hash fmdiff;
-		set SVN_MERGE fmdiff
+		set SVN_MERGE fmdiff;
 	end;
 
 	if hash subl;
@@ -33,9 +33,10 @@ if test (uname) = "Darwin";
 	end;
 
 	#--------- Homebrew stuff --------#
-
-	set PATH /usr/local/share/python /usr/local/bin /usr/local/sbin $PATH;
 	#Brew path settings (should be last to alter the PATH)
+	set PATH /usr/local/sbin $PATH;
+	set PATH /usr/local/bin $PATH;
+	set PATH /usr/local/share/python $PATH;
 else;
 	function ls; ls -hl --color; end;
 	function l; ls -hl --color; end;
