@@ -91,7 +91,7 @@ shopt -s nocaseglob
 
 alias vi='vim'
 
-alias='curl http://ip.appspot.com'
+alias ip='curl http://ip.appspot.com'
 
 alias ..='cd ..'
 alias c='clear'

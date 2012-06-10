@@ -127,7 +127,7 @@ end;
 set EDITOR vi
 set AVR_ISP dragon_isp
 
-function vi; vim; end;
+function vi; vim $argv; end;
 
 function ip; curl http://ip.appspot.com; end;
 
