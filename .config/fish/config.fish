@@ -62,7 +62,7 @@ end;
 
 function parse_git_branch -d "Return branch name if inside a git repo and the master branch is not checked out";
 	if hash git;
-		set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {print $2}');
+		set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {for(i=2;i<=NF;i++) {{printf "%s%s", (i>2?" ":""), $i}}}');
 		printf "%s" $branch;
 	end;
 end;
