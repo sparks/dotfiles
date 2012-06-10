@@ -19,6 +19,11 @@ if test (uname) = "Darwin";
 		set SVN_MERGE fmdiff;
 	end;
 
+	#Mac Aliases
+	if test -x /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE;
+		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
+	end;
+
 	if hash subl;
 		function s; subl $argv; end;
 	end;
@@ -33,33 +38,41 @@ if test (uname) = "Darwin";
 	end;
 
 	#--------- Homebrew stuff --------#
+
 	#Brew path settings (should be last to alter the PATH)
 	set PATH /usr/local/sbin $PATH;
 	set PATH /usr/local/bin $PATH;
 	set PATH /usr/local/share/python $PATH;
 else;
 	function ls; ls -hl --color; end;
-	function l; ls -hl --color; end;
 	function la; ls -ahl --color; end;
+	function l; ls -hl --color; end;
 end;
 
 #--------- Prompt --------#
+
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
-	set -l result (git status --porcelain ^&-);
-	if test -n "$result";
-		printf "☐";
+	if hash git;
+		set -l result (git status --porcelain ^&-);
+		if test -n "$result";
+			printf "☐";
+		end;
 	end;
 end;
 
 function parse_git_branch -d "Return branch name if inside a git repo and the master branch is not checked out";
-	set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {print $2}');
-	printf "%s" $branch;
+	if hash git;
+		set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {print $2}');
+		printf "%s" $branch;
+	end;
 end;
 
 function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
-	set -l result (svn status ^&-);
-	if test -n "$result";
-		printf "■";
+	if hash svn;
+		set -l result (svn status ^&-);
+		if test -n "$result";
+			printf "■";
+		end;
 	end;
 end;
 
@@ -115,6 +128,8 @@ set EDITOR vi
 set AVR_ISP dragon_isp
 
 function vi; vim; end;
+
+function ip; curl http://ip.appspot.com; end;
 
 function ..; cd ..; end;
 function c; clear; end;

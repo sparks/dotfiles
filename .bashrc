@@ -51,22 +51,13 @@ if [ `uname` == 'Darwin' ]; then
 	fi
 else
 	alias ls='ls -hl --color'
-	alias l='ls -hl --color' 
 	alias la='ls -ahl --color'
+	alias l='ls -hl --color' 
 
 	if [ -f /etc/bash_completion ]; then
 		. /etc/bash_completion
 	fi
 fi
-
-export EDITOR='vi'
-export AVR_ISP='dragon_isp'
-
-#-------- TMUX ----------#
-
-# if [ -n "$TMUX" ]; then
-# 	f(){ if [ "$PWD" != "$LPWD" ];then LPWD="$PWD"; tmux rename-window ${PWD//*\//}; fi }; export PROMPT_COMMAND=f;
-# fi
 
 #--------- Prompt --------#
 
@@ -92,10 +83,15 @@ fi
 
 #--------- Generic Aliases and Bash Stuff --------#
 
+export EDITOR='vi'
+export AVR_ISP='dragon_isp'
+
 shopt -s cdspell
 shopt -s nocaseglob
 
 alias vi='vim'
+
+alias='curl http://ip.appspot.com'
 
 alias ..='cd ..'
 alias c='clear'
