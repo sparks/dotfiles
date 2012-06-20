@@ -79,10 +79,10 @@ end;
 set prompt_bracket_color yellow
 
 if test (uname) = "Darwin";
-	if hostname | cut -d . -f 1 | grep -i 0x0C >- ^-;
+	if hostname | cut -d . -f 1 | grep -i 0x0C >/dev/null ^/dev/null;
 		set prompt_bracket_color red;
 	end;
-	if hostname | cut -d . -f 1 | grep -i 0x0A >- ^-;
+	if hostname | cut -d . -f 1 | grep -i 0x0A >/dev/null ^/dev/null;
 		set prompt_bracket_color cyan;
 	end;
 end;
