@@ -3,20 +3,20 @@
 if test (uname) = "Darwin";
 	#Crosspack MAN Files
 	if test -d /usr/local/CrossPack-AVR/man;
-		set MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
+		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
 	end;
 
 	#ARM Compile Tools
 	if test -d /usr/local/arm-cs-tools/bin;
-		set PATH /usr/local/arm-cs-tools/bin $PATH;
+		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
 	end;
 
 	#XTerm (Octave and GnuPlot)
-	set GNUTERM 'x11';
+	set -xg GNUTERM 'x11';
 
 	#SVN diff/merge tool
 	if hash fmdiff;
-		set SVN_MERGE fmdiff;
+		set -xg SVN_MERGE fmdiff;
 	end;
 
 	#Mac Aliases
@@ -40,9 +40,9 @@ if test (uname) = "Darwin";
 	#--------- Homebrew stuff --------#
 
 	#Brew path settings (should be last to alter the PATH)
-	set PATH /usr/local/sbin $PATH;
-	set PATH /usr/local/bin $PATH;
-	set PATH /usr/local/share/python $PATH;
+	set -xg PATH /usr/local/sbin $PATH;
+	set -xg PATH /usr/local/bin $PATH;
+	set -xg PATH /usr/local/share/python $PATH;
 else;
 	function ls; ls -hl --color; end;
 	function la; ls -ahl --color; end;
@@ -124,8 +124,8 @@ end;
 
 #--------- Generic Aliases and Bash Stuff --------#
 
-set EDITOR vi
-set AVR_ISP dragon_isp
+set -xg EDITOR vi
+set -xg AVR_ISP dragon_isp
 
 function vi; vim $argv; end;
 
