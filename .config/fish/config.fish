@@ -1,5 +1,7 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
+set -xg MANPATH (man --path)
+
 if test (uname) = "Darwin";
 	#Crosspack MAN Files
 	if test -d /usr/local/CrossPack-AVR/man;
@@ -83,7 +85,7 @@ if test (uname) = "Darwin";
 		set prompt_bracket_color red;
 	end;
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A >/dev/null ^/dev/null;
-		set prompt_bracket_color cyan;
+		set prompt_bracket_color yellow;
 	end;
 end;
 
