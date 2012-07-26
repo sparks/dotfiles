@@ -14,7 +14,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock showhidden -bool true
 
 # Disable menu bar transparency
-#defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+# defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Show remaining percentage; hide time remaining
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
@@ -152,6 +152,9 @@ chflags nohidden ~/Library
 # Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 # Commented out, as this is known to cause problems when saving files in Adobe Illustrator CS5 :(
 #echo "0x08000100:0" > ~/.CFUserTextEncoding
+
+# Kill random extra window when opening total terminal
+defaults write com.apple.Terminal TotalTerminalCloseWindowsOnStart -bool YES
 
 # Kill affected applications
 for app in Safari Finder Dock Mail; do killall "$app"; done
