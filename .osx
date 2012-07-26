@@ -158,3 +158,8 @@ defaults write com.apple.Terminal TotalTerminalCloseWindowsOnStart -bool YES
 
 # Kill affected applications
 for app in Safari Finder Dock Mail; do killall "$app"; done
+
+# Disable Spotlight and Remove Icon
+# sudo mdutil -a -i off
+# sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+# killall SystemUIServer
