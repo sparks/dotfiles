@@ -19,3 +19,5 @@
 [gist]
 	browse = yes
 	private = no
+[merge]
+	tool = opendiff
