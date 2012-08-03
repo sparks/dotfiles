@@ -99,22 +99,20 @@ function fish_prompt;
 
 	set_color yellow
 
-	if test -d ./.svn;
-		set -l svn_dirty (parse_svn_dirty)
+	set -l svn_dirty (parse_svn_dirty)
 
-		if test -n "$svn_dirty";
-			printf " %s" $svn_dirty;
-		end;
+	if test -n "$svn_dirty";
+		printf " %s" $svn_dirty;
+	end;
+	
+	set -l git_branch (parse_git_branch)
+	set -l git_dirty (parse_git_dirty)
+
+	if test -n "$git_branch";
+		printf " (%s)%s" $git_branch $dirty;
 	else;
-		set -l git_branch (parse_git_branch)
-		set -l git_dirty (parse_git_dirty)
-
-		if test -n "$git_branch";
-			printf " (%s)%s" $git_branch $dirty;
-		else;
-			if test -n "$git_dirty";
-				printf " %s" $git_dirty;
-			end;
+		if test -n "$git_dirty";
+			printf " %s" $git_dirty;
 		end;
 	end;
 
