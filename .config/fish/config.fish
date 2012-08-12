@@ -13,6 +13,10 @@ if test (uname) = "Darwin";
 		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
 	end;
 
+	if test -d /usr/texbin;
+		set -xg PATH /usr/texbin $PATH;
+	end;
+
 	#XTerm (Octave and GnuPlot)
 	set -xg GNUTERM 'x11';
 
