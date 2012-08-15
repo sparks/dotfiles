@@ -21,7 +21,7 @@ if test (uname) = "Darwin";
 	set -xg GNUTERM 'x11';
 
 	#SVN diff/merge tool
-	if hash fmdiff;
+	if which fmdiff >- ^&1;
 		set -xg SVN_MERGE fmdiff;
 	end;
 
@@ -30,7 +30,7 @@ if test (uname) = "Darwin";
 		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
 	end;
 
-	if hash subl;
+	if which subl >- ^&1;
 		function s; subl $argv; end;
 	end;
 
@@ -58,7 +58,7 @@ end;
 #--------- Prompt --------#
 
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
-	if hash git;
+	if which git >- ^&1;
 		set -l result (git status --porcelain ^&-);
 		if test -n "$result";
 			printf "☐";
@@ -67,14 +67,14 @@ function parse_git_dirty -d "Return a marker if inside a dirty git repo";
 end;
 
 function parse_git_branch -d "Return branch name if inside a git repo and the master branch is not checked out";
-	if hash git;
+	if which git >- ^&1;
 		set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {for(i=2;i<=NF;i++) {{printf "%s%s", (i>2?" ":""), $i}}}');
 		printf "%s" $branch;
 	end;
 end;
 
 function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
-	if hash svn;
+	if which svn >- ^&1;
 		set -l result (svn status ^&-);
 		if test -n "$result";
 			printf "■";
@@ -140,7 +140,7 @@ function c; clear; end;
 function p; cd ~/Projects/; end;
 
 #avrdude
-if hash avrdude;
+if which avrdude >- ^&1;
 	function usbasp; avrdude -c usbasp -P usb; end;
 	function usbtiny; avrdude -c usbtiny -P usb; end;
 	function mk2; avrdude -c avrispmkII -P usb; end;
