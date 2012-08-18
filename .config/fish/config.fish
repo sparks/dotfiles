@@ -4,8 +4,9 @@ set -xg MANPATH (man --path)
 
 if test (uname) = "Darwin";
 	#Crosspack MAN Files
-	if test -d /usr/local/CrossPack-AVR/man;
+	if test -d /usr/local/CrossPack-AVR;
 		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
+		set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
 	end;
 
 	#ARM Compile Tools
