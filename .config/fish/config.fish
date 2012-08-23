@@ -51,9 +51,9 @@ if test (uname) = "Darwin";
 	set -xg PATH /usr/local/bin $PATH;
 	set -xg PATH /usr/local/share/python $PATH;
 else;
-	function ls; ls -hl --color; end;
-	function la; ls -ahl --color; end;
-	function l; ls -hl --color; end;
+	function ls; ls -hl --color $argv; end;
+	function la; ls -ahl --color $argv; end;
+	function l; ls -hl --color $argv; end;
 end;
 
 #--------- Prompt --------#
