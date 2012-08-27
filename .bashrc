@@ -1,14 +1,20 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
 if [ `uname` == 'Darwin' ]; then
-	#Crosspack MAN Files
+	#Crosspack Files
 	if [ -d /usr/local/CrossPack-AVR/man ]; then
 		export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
+		export PATH=/usr/local/Crosspack-AVR/bin:$PATH
 	fi
 
 	#ARM Compile Tools
 	if [ -d /usr/local/arm-cs-tools/bin ]; then
 		export PATH=/usr/local/arm-cs-tools/bin:$PATH
+	fi
+
+	#Latex Tools
+	if [ -d /usr/texbin ]; then
+		export PATH=/usr/texbin:$PATH
 	fi
 
 	#XTerm (Octave and GnuPlot)
@@ -37,13 +43,10 @@ if [ `uname` == 'Darwin' ]; then
 	
 	#--------- Homebrew stuff --------#
 
-	#Brew path settings (should be last to alter the PATH
-	export PATH=/usr/local/bin:$PATH
+	#Brew path settings (should be last to alter the PATH)
+	export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
 	if [ `command -v brew` ]; then
-		#Brew path settings (should be last to alter the PATH
-		export PATH=/usr/local/share/python:/usr/local/sbin:$PATH
-
 		#Brew bash_completion
 		if [ -f `brew --prefix`/etc/bash_completion ]; then
 			. `brew --prefix`/etc/bash_completion
@@ -59,29 +62,44 @@ else
 	fi
 fi
 
-#--------- Prompt --------#
+#--------- Oddities --------#
 
 function parse_git_dirty() {
 	if [ `command -v git` ]; then
-		[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+		[[ $(git status --porcelain 2> /dev/null) != "" ]] && echo "*"
 	fi
 }
 
 function parse_git_branch() {
 	if [ `command -v git` ]; then
-		git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1$(parse_git_dirty)/"
+		git branch 2> /dev/null | awk '($1 ~ /\*/) && ($2 !~ /master/) {for(i=2;i<=NF;i++) {{printf "%s%s", (i>2?" ":""), $i}}}'
 	fi
 }
 
-if [ `uname` == 'Darwin' -a `whoami` == 'sparky' ]; then
-	export PS1="\[\e[1;31m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;31m\]]\[\e[0m\] "
-	export PS2="\[\e[1:31m\] >\[\e[0m\] "
-else
-	export PS1="\[\e[1;36m\][\[\e[0;37m\]\W\[\e[1;33m\]\$(parse_git_branch)\[\e[1;36m\]]\[\e[0m\] "
-	export PS2="\[\e[1:36m\] >\[\e[0m\] "
+function parse_svn_dirty() {
+	if [ `command -v svn` ]; then
+		[[ $(svn status 2> /dev/null) != "" ]] && echo "*"
+	fi
+}
+
+#--------- Prompt --------#
+
+PROMPT_COLOR="\[\e[0;36m\]"
+TEXT_COLOR="\[\e[0;37m\]"
+
+if [ `uname` == 'Darwin' ]; then
+	if [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C` ]; then
+		PROMPT_COLOR="\[\e[0;31m\]"
+	elif [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A` ]; then
+		PROMPT_COLOR="\[\e[0;33m\]"
+	fi
 fi
 
-#--------- Generic Aliases and Bash Stuff --------#
+export PS1="$PROMPT_COLOR[\h$TEXT_COLOR \W$PROMPT_COLOR]\[\e[0m\] "
+export PS2="$PROMPT_COLOR >\[\e[0m\] "
+
+
+#--------- Generic Aliases and Shell Stuff --------#
 
 export EDITOR='vi'
 export AVR_ISP='dragon_isp'
@@ -90,8 +108,6 @@ shopt -s cdspell
 shopt -s nocaseglob
 
 alias vi='vim'
-
-alias myip='curl http://ip.appspot.com'
 
 alias ..='cd ..'
 alias c='clear'

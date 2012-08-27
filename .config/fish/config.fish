@@ -3,7 +3,7 @@
 set -xg MANPATH (man --path)
 
 if test (uname) = "Darwin";
-	#Crosspack MAN Files
+	#Crosspack Files
 	if test -d /usr/local/CrossPack-AVR;
 		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
 		set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
@@ -14,6 +14,7 @@ if test (uname) = "Darwin";
 		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
 	end;
 
+	#Latex Tools
 	if test -d /usr/texbin;
 		set -xg PATH /usr/texbin $PATH;
 	end;
@@ -47,8 +48,8 @@ if test (uname) = "Darwin";
 	#--------- Homebrew stuff --------#
 
 	#Brew path settings (should be last to alter the PATH)
-	set -xg PATH /usr/local/sbin $PATH;
 	set -xg PATH /usr/local/bin $PATH;
+	set -xg PATH /usr/local/sbin $PATH;
 	set -xg PATH /usr/local/share/python $PATH;
 else;
 	function ls; ls -hl --color $argv; end;
@@ -56,7 +57,7 @@ else;
 	function l; ls -hl --color $argv; end;
 end;
 
-#--------- Prompt --------#
+#--------- Oddities --------#
 
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
 	if which git ^&1 >&-;
@@ -83,58 +84,40 @@ function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
 	end;
 end;
 
-set prompt_bracket_color yellow
+#--------- Prompt --------#
+
+set prompt_color yellow
+set text_color white
+set anote_color yellow
 
 if test (uname) = "Darwin";
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C >/dev/null ^/dev/null;
-		set prompt_bracket_color red;
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C ^&1 >&-
+		set prompt_color red;
 	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A >/dev/null ^/dev/null;
-		set prompt_bracket_color yellow;
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
+		set prompt_color yellow;
 	end;
 end;
 
 function fish_prompt;
-	set_color -o $prompt_bracket_color;
-	printf "[";
+	set_color $prompt_color;
+	printf "[%s " (hostname | cut -d . -f 1);
 
-	set_color normal;
-	set_color white;
+	set_color $text_color;
 	printf "%s" (prompt_pwd);
 
-	set_color yellow
-
-	set -l svn_dirty (parse_svn_dirty)
-
-	if test -n "$svn_dirty";
-		printf " %s" $svn_dirty;
-	end;
-	
-	set -l git_branch (parse_git_branch)
-	set -l git_dirty (parse_git_dirty)
-
-	if test -n "$git_branch";
-		printf " (%s)%s" $git_branch $dirty;
-	else;
-		if test -n "$git_dirty";
-			printf " %s" $git_dirty;
-		end;
-	end;
-
-	set_color -o $prompt_bracket_color;
+	set_color $prompt_color;
 	printf "] ";
 
 	set_color normal;
 end;
 
-#--------- Generic Aliases and Bash Stuff --------#
+#--------- Generic Aliases and Shell Stuff --------#
 
 set -xg EDITOR vi
 set -xg AVR_ISP dragon_isp
 
 function vi; vim $argv; end;
-
-function ip; curl http://ip.appspot.com; end;
 
 function ..; cd ..; end;
 function c; clear; end;
@@ -142,10 +125,10 @@ function p; cd ~/Projects/; end;
 
 #avrdude
 if which avrdude ^&1 >&-;
-	function usbasp; avrdude -c usbasp -P usb; end;
-	function usbtiny; avrdude -c usbtiny -P usb; end;
-	function mk2; avrdude -c avrispmkII -P usb; end;
-	function dragon; avrdude -c dragon_isp -P usb; end;
+	function usbasp; avrdude -c usbasp -P usb $argv; end;
+	function usbtiny; avrdude -c usbtiny -P usb $argv; end;
+	function mk2; avrdude -c avrispmkII -P usb $argv; end;
+	function dragon; avrdude -c dragon_isp -P usb $argv; end;
 end;
 
 #--------- ASCII Art --------#
