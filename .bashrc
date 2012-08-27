@@ -84,14 +84,14 @@ function parse_svn_dirty() {
 
 #--------- Prompt --------#
 
-PROMPT_COLOR="\[\e[0;36m\]"
+PROMPT_COLOR="\[\e[0;31m\]" #Red
 TEXT_COLOR="\[\e[0;37m\]"
 
 if [ `uname` == 'Darwin' ]; then
 	if [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C` ]; then
-		PROMPT_COLOR="\[\e[0;31m\]"
+		PROMPT_COLOR="\[\e[0;36m\]" #Cyan
 	elif [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A` ]; then
-		PROMPT_COLOR="\[\e[0;33m\]"
+		PROMPT_COLOR="\[\e[0;33m\]" #Yellow
 	fi
 fi
 

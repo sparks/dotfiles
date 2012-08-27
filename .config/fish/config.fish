@@ -86,13 +86,13 @@ end;
 
 #--------- Prompt --------#
 
-set prompt_color yellow
+set prompt_color red
 set text_color white
 set anote_color yellow
 
 if test (uname) = "Darwin";
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C ^&1 >&-
-		set prompt_color red;
+		set prompt_color cyan;
 	end;
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
 		set prompt_color yellow;
@@ -101,7 +101,12 @@ end;
 
 function fish_prompt;
 	set_color $prompt_color;
-	printf "[%s " (hostname | cut -d . -f 1);
+
+	if test (uname) = "Darwin";
+		printf "[%s " (scutil --get ComputerName | cut -d . -f 1);
+	else;
+		printf "[%s " (hostname | cut -d . -f 1);
+	end;
 
 	set_color $text_color;
 	printf "%s" (prompt_pwd);
