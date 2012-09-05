@@ -40,7 +40,14 @@ if [ `uname` == 'Darwin' ]; then
 	
 	#Screen
 	alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
+
+	#--------- Go Lang --------#
 	
+	if [ -d /usr/local/arm-cs-tools/bin ]; then
+		export GOROOT='/usr/local/Cellar/go/1.0.2/'
+		export PATH='$GOROOT/bin':$PATH
+	fi
+
 	#--------- Homebrew stuff --------#
 
 	#Brew path settings (should be last to alter the PATH)
