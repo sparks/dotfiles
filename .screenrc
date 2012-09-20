@@ -10,8 +10,8 @@ hardstatus on
 hardstatus alwayslastline
 hardstatus string "%{= .w}%-Lw%{+b .5}[%{-b .w}%n %t%{+b .5}]%{-b .w}%+Lw %-= %{+b .5}[%{-b .w}%c%{+b k5}] [%{-b .w}%l%{+b .5}]"
 
-screen -t Python 1 python
-screen -t Scratch 0 bash
+#screen -t Python 1 python
+#screen -t Scratch 0 bash
 
 escape ^Ww
 
