@@ -41,19 +41,17 @@ if [ `uname` == 'Darwin' ]; then
 	#Screen
 	alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
 
-	#--------- Go Lang --------#
-	
-	if [ -d /usr/local/arm-cs-tools/bin ]; then
-		export GOROOT='/usr/local/Cellar/go/1.0.2/'
-		export PATH='$GOROOT/bin':$PATH
-	fi
-
 	#--------- Homebrew stuff --------#
 
 	#Brew path settings (should be last to alter the PATH)
 	export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
 	if [ `command -v brew` ]; then
+		#--------- Go Lang --------#
+		export GOROOT='/usr/local/opt/go'
+		export GOPATH='/usr/local/share/go'
+		export PATH='$GOPATH/bin':$PATH
+
 		#Brew bash_completion
 		if [ -f `brew --prefix`/etc/bash_completion ]; then
 			. `brew --prefix`/etc/bash_completion

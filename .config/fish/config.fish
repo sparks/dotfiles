@@ -45,11 +45,11 @@ if test (uname) = "Darwin";
 		screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200;
 	end;
 
-	#--------- Go Lang --------#
-
-	if test -d /usr/local/arm-cs-tools/bin;
-		set -xg GOROOT /usr/local/Cellar/go/1.0.2/;
-		set -xg PATH $GOROOT/bin $PATH;
+	if which brew ^&1 >&-
+		#--------- Go Lang --------#
+		set -xg GOROOT /usr/local/opt/go
+		set -xg GOPATH /usr/local/share/go
+		set -xg PATH $GOPATH/bin $PATH;
 	end;
 
 	#--------- Homebrew stuff --------#
