@@ -21,3 +21,5 @@
 	private = no
 [merge]
 	tool = opendiff
+[push]
+	default = simple
