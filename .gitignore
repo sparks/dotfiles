@@ -12,6 +12,7 @@
 !.vimrc
 !.tm_properties
 !.timed
+!.matplotlib/matplotlibrc
 !.config
 !.config/fish
 !.config/fish/*

@@ -1,0 +1,12 @@
+backend      : MacOSX
+
+lines.linewidth   : 1.5     # line width in points
+
+font.size           : 16.0
+
+axes.grid           : True   # display grid or not
+
+legend.fontsize      : medium
+
+figure.subplot.wspace  : 0.35    # the amount of width reserved for blank space between subplots
+figure.subplot.hspace  : 0.35    # the amount of height reserved for white space between subplots
