@@ -21,10 +21,10 @@ bind 3:ctrl;alt;cmd       throw 2 resize
 bind n:ctrl;alt;cmd       throw next resize
 
 # Focus Bindings
-# bind right:cmd            focus right
-# bind left:cmd             focus left
-# bind up:cmd               focus up
-# bind down:cmd             focus down
+bind right:ctrl;alt            focus right
+bind left:ctrl;alt             focus left
+bind up:ctrl;alt               focus up
+bind down:ctrl;alt             focus down
 # bind up:cmd;alt           focus behind
 # bind down:cmd;alt         focus behind
 
