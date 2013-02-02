@@ -1,19 +1,19 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-if [ `uname` == 'Darwin' ]; then
+if [[ `uname` == 'Darwin' ]]; then
 	#Crosspack Files
-	if [ -d /usr/local/CrossPack-AVR/man ]; then
+	if [[ -d /usr/local/CrossPack-AVR/man ]]; then
 		export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
 		export PATH=/usr/local/Crosspack-AVR/bin:$PATH
 	fi
 
 	#ARM Compile Tools
-	if [ -d /usr/local/arm-cs-tools/bin ]; then
+	if [[ -d /usr/local/arm-cs-tools/bin ]]; then
 		export PATH=/usr/local/arm-cs-tools/bin:$PATH
 	fi
 
 	#Latex Tools
-	if [ -d /usr/texbin ]; then
+	if [[ -d /usr/texbin ]]; then
 		export PATH=/usr/texbin:$PATH
 	fi
 
@@ -21,16 +21,16 @@ if [ `uname` == 'Darwin' ]; then
 	export GNUTERM='x11'
 
 	#SVN diff/merge tool
-	if [ `command -v fmdiff` ]; then
+	if [[ `command -v fmdiff` ]]; then
 		export SVN_MERGE=fmdiff
 	fi
 
 	#Mac Aliases
-	if [ `command -v /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE` ]; then
+	if [[ `command -v /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE` ]]; then
 		alias eagle='/Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&'
 	fi
 
-	if [ `command -v subl` ]; then
+	if [[ `command -v subl` ]]; then
 		alias s='subl'
 	fi
 
@@ -46,14 +46,14 @@ if [ `uname` == 'Darwin' ]; then
 	#Brew path settings (should be last to alter the PATH)
 	export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
-	if [ `command -v brew` ]; then
+	if [[ `command -v brew` ]]; then
 		#--------- Go Lang --------#
 		export GOROOT='/usr/local/opt/go'
 		export GOPATH='/usr/local/share/go'
 		export PATH='$GOPATH/bin':$PATH
 
 		#Brew bash_completion
-		if [ -f `brew --prefix`/etc/bash_completion ]; then
+		if [[ -f `brew --prefix`/etc/bash_completion ]]; then
 			. `brew --prefix`/etc/bash_completion
 		fi
 	fi
@@ -62,7 +62,7 @@ else
 	alias la='ls -ahl --color'
 	alias l='ls -hl --color' 
 
-	if [ -f /etc/bash_completion ]; then
+	if [[ -f /etc/bash_completion ]]; then
 		. /etc/bash_completion
 	fi
 fi
@@ -70,19 +70,19 @@ fi
 #--------- Oddities --------#
 
 function parse_git_dirty() {
-	if [ `command -v git` ]; then
+	if [[ `command -v git` ]]; then
 		[[ $(git status --porcelain 2> /dev/null) != "" ]] && echo "*"
 	fi
 }
 
 function parse_git_branch() {
-	if [ `command -v git` ]; then
+	if [[ `command -v git` ]]; then
 		git branch 2> /dev/null | awk '($1 ~ /\*/) && ($2 !~ /master/) {for(i=2;i<=NF;i++) {{printf "%s%s", (i>2?" ":""), $i}}}'
 	fi
 }
 
 function parse_svn_dirty() {
-	if [ `command -v svn` ]; then
+	if [[ `command -v svn` ]]; then
 		[[ $(svn status 2> /dev/null) != "" ]] && echo "*"
 	fi
 }
@@ -92,10 +92,10 @@ function parse_svn_dirty() {
 PROMPT_COLOR="\[\e[0;31m\]" #Red
 TEXT_COLOR="\[\e[0;37m\]"
 
-if [ `uname` == 'Darwin' ]; then
-	if [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C` ]; then
+if [[ `uname` == 'Darwin' ]]; then
+	if [[ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C` ]]; then
 		PROMPT_COLOR="\[\e[0;36m\]" #Cyan
-	elif [ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A` ]; then
+	elif [[ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A` ]]; then
 		PROMPT_COLOR="\[\e[0;33m\]" #Yellow
 	fi
 fi
@@ -112,14 +112,16 @@ export AVR_ISP='dragon_isp'
 shopt -s cdspell
 shopt -s nocaseglob
 
-alias vi='vim'
+if [[ `command -v vim` ]]; then
+	alias vi='vim'
+fi
 
 alias ..='cd ..'
 alias c='clear'
 alias p='cd ~/Projects/'
 
 #avrdude
-if [ `command -v avrdude` ]; then
+if [[ `command -v avrdude` ]]; then
 	alias usbasp='avrdude -c usbasp -P usb'
 	alias usbtiny='avrdude -c usbtiny -P usb'
 	alias mk2='avrdude -c avrispmkII -P usb'

@@ -131,7 +131,9 @@ end;
 set -xg EDITOR vi
 set -xg AVR_ISP dragon_isp
 
-function vi; vim $argv; end;
+if which avrdude ^&1 >&-;
+	function vi; vim $argv; end;
+end;
 
 function ..; cd ..; end;
 function c; clear; end;
