@@ -47,11 +47,6 @@ if [[ `uname` == 'Darwin' ]]; then
 	export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
 	if [[ `command -v brew` ]]; then
-		#--------- Go Lang --------#
-		export GOROOT='/usr/local/opt/go'
-		export GOPATH='/usr/local/share/go'
-		export PATH='$GOPATH/bin':$PATH
-
 		#Brew bash_completion
 		if [[ -f `brew --prefix`/etc/bash_completion ]]; then
 			. `brew --prefix`/etc/bash_completion
@@ -64,6 +59,17 @@ else
 
 	if [[ -f /etc/bash_completion ]]; then
 		. /etc/bash_completion
+	fi
+fi
+
+#--------- Go Lang --------#
+
+if [[ `command -v go` ]]; then
+	if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
+		echo "Bang"
+		export GOROOT='/usr/local/opt/go'
+		export GOPATH='/usr/local/share/go'
+		export PATH='$GOPATH/bin':$PATH
 	fi
 fi
 
