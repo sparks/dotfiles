@@ -66,7 +66,6 @@ fi
 
 if [[ `command -v go` ]]; then
 	if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
-		echo "Bang"
 		export GOROOT='/usr/local/opt/go'
 		export GOPATH='/usr/local/share/go'
 		export PATH='$GOPATH/bin':$PATH
