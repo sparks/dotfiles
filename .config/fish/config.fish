@@ -1,6 +1,6 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-set -xg MANPATH (man --path)
+set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
 	#Crosspack Files
@@ -49,9 +49,13 @@ if test (uname) = "Darwin";
 
 	if which brew ^&1 >&-
 		#--------- Go Lang --------#
-		set -xg GOROOT /usr/local/opt/go
-		set -xg GOPATH /usr/local/share/go
-		set -xg PATH $GOPATH/bin $PATH;
+		set -xg GOROOT /usr/local/opt/go $GOROOT
+		set -xg GOPATH /usr/local/share/go $GOPATH
+		set -xg GOPATH /Users/sparky/Projects/go $GOPATH
+		set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH
+		for i in $GOPATH;
+			set -xg PATH $i/bin $PATH;
+		end;
 	end;
 
 	#--------- Homebrew stuff --------#

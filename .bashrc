@@ -66,9 +66,13 @@ fi
 
 if [[ `command -v go` ]]; then
 	if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
-		export GOROOT='/usr/local/opt/go'
-		export GOPATH='/usr/local/share/go'
-		export PATH='$GOPATH/bin':$PATH
+		export GOROOT='/usr/local/opt/go':$GOROOT
+		export GOPATH='/usr/local/share/go':$GOPATH
+		export GOPATH='/Users/sparky/Projects/go':$GOPATH
+		export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
+		for i in ${GOPATH//:/ }; do
+			export PATH=$i/bin:$PATH
+		done
 	fi
 fi
 
