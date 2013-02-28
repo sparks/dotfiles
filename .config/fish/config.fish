@@ -22,7 +22,7 @@ if test (uname) = "Darwin";
 			set -xg PATH /usr/texbin $PATH;
 		end;
 
-		if which brew ^&1 >&-
+		if which go ^&1 >&-;
 			#--------- Go Lang --------#
 			set -xg GOROOT /usr/local/opt/go $GOROOT
 			set -xg GOPATH /usr/local/share/go $GOPATH
@@ -31,14 +31,13 @@ if test (uname) = "Darwin";
 			for i in $GOPATH;
 				set -xg PATH $i/bin $PATH;
 			end;
-
-			#--------- Homebrew stuff --------#
-
-			#Brew path settings (should be last to alter the PATH)
-			set -xg PATH /usr/local/bin $PATH;
-			set -xg PATH /usr/local/sbin $PATH;
-			set -xg PATH /usr/local/share/python $PATH;
 		end;
+
+		#--------- Homebrew stuff --------#
+		#Brew path settings (should be last to alter the PATH)
+		set -xg PATH /usr/local/bin $PATH;
+		set -xg PATH /usr/local/sbin $PATH;
+		set -xg PATH /usr/local/share/python $PATH;
 	end;
 
 	#XTerm (Octave and GnuPlot)

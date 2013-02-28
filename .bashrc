@@ -1,21 +1,43 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
 if [[ `uname` == 'Darwin' ]]; then
-	#Crosspack Files
-	if [[ -d /usr/local/CrossPack-AVR/man ]]; then
-		export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
-		export PATH=/usr/local/Crosspack-AVR/bin:$PATH
-	fi
+	if [[ -z $BASHCONFIGD ]]; then
+		#Crosspack Files
+		if [[ -d /usr/local/CrossPack-AVR/man ]]; then
+			export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
+			export PATH=/usr/local/Crosspack-AVR/bin:$PATH
+		fi
 
-	#ARM Compile Tools
-	if [[ -d /usr/local/arm-cs-tools/bin ]]; then
-		export PATH=/usr/local/arm-cs-tools/bin:$PATH
-	fi
+		#ARM Compile Tools
+		if [[ -d /usr/local/arm-cs-tools/bin ]]; then
+			export PATH=/usr/local/arm-cs-tools/bin:$PATH
+		fi
 
-	#Latex Tools
-	if [[ -d /usr/texbin ]]; then
-		export PATH=/usr/texbin:$PATH
-	fi
+		#Latex Tools
+		if [[ -d /usr/texbin ]]; then
+			export PATH=/usr/texbin:$PATH
+		fi
+
+
+		#--------- Go Lang --------#
+
+		if [[ `command -v go` ]]; then
+			if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
+				export GOROOT='/usr/local/opt/go':$GOROOT
+				export GOPATH='/usr/local/share/go':$GOPATH
+				export GOPATH='/Users/sparky/Projects/go':$GOPATH
+				export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
+				for i in ${GOPATH//:/ }; do
+					export PATH=$i/bin:$PATH
+				done
+			fi
+		fi
+
+		#--------- Homebrew stuff --------#
+
+		#Brew path settings (should be last to alter the PATH)
+		export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
+	fi;
 
 	#XTerm (Octave and GnuPlot)
 	export GNUTERM='x11'
@@ -41,11 +63,6 @@ if [[ `uname` == 'Darwin' ]]; then
 	#Screen
 	alias pirate='screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200'
 
-	#--------- Homebrew stuff --------#
-
-	#Brew path settings (should be last to alter the PATH)
-	export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
-
 	if [[ `command -v brew` ]]; then
 		#Brew bash_completion
 		if [[ -f `brew --prefix`/etc/bash_completion ]]; then
@@ -59,20 +76,6 @@ else
 
 	if [[ -f /etc/bash_completion ]]; then
 		. /etc/bash_completion
-	fi
-fi
-
-#--------- Go Lang --------#
-
-if [[ `command -v go` ]]; then
-	if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
-		export GOROOT='/usr/local/opt/go':$GOROOT
-		export GOPATH='/usr/local/share/go':$GOPATH
-		export GOPATH='/Users/sparky/Projects/go':$GOPATH
-		export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
-		for i in ${GOPATH//:/ }; do
-			export PATH=$i/bin:$PATH
-		done
 	fi
 fi
 
@@ -199,5 +202,7 @@ alias truck='echo "
 "'
 
 ##### RUN COMMANDS BEFORE START #####
+
+export BASHCONFIGD=true
 
 truck #draw a pretty picture
