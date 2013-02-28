@@ -1,22 +1,44 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-set -xg MANPATH (man --path) $MANPATH
+if test ! $FISHCONFIGD;
+	set -xg MANPATH (man --path) $MANPATH
+end;
 
 if test (uname) = "Darwin";
-	#Crosspack Files
-	if test -d /usr/local/CrossPack-AVR;
-		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
-		set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
-	end;
+	if test ! $FISHCONFIGD;
+		#Crosspack Files
+		if test -d /usr/local/CrossPack-AVR;
+			set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
+			set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
+		end;
 
-	#ARM Compile Tools
-	if test -d /usr/local/arm-cs-tools/bin;
-		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
-	end;
+		#ARM Compile Tools
+		if test -d /usr/local/arm-cs-tools/bin;
+			set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
+		end;
 
-	#Latex Tools
-	if test -d /usr/texbin;
-		set -xg PATH /usr/texbin $PATH;
+		#Latex Tools
+		if test -d /usr/texbin;
+			set -xg PATH /usr/texbin $PATH;
+		end;
+
+		if which brew ^&1 >&-
+			#--------- Go Lang --------#
+			set -xg GOROOT /usr/local/opt/go $GOROOT
+			set -xg GOPATH /usr/local/share/go $GOPATH
+			set -xg GOPATH /Users/sparky/Projects/go $GOPATH
+			set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH
+			for i in $GOPATH;
+				set -xg PATH $i/bin $PATH;
+			end;
+
+			#--------- Homebrew stuff --------#
+
+			#Brew path settings (should be last to alter the PATH)
+			set -xg PATH /usr/local/bin $PATH;
+			set -xg PATH /usr/local/sbin $PATH;
+			set -xg PATH /usr/local/share/python $PATH;
+		end;
 	end;
 
 	#XTerm (Octave and GnuPlot)
@@ -46,24 +68,6 @@ if test (uname) = "Darwin";
 	function pirate; 
 		screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200;
 	end;
-
-	if which brew ^&1 >&-
-		#--------- Go Lang --------#
-		set -xg GOROOT /usr/local/opt/go $GOROOT
-		set -xg GOPATH /usr/local/share/go $GOPATH
-		set -xg GOPATH /Users/sparky/Projects/go $GOPATH
-		set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH
-		for i in $GOPATH;
-			set -xg PATH $i/bin $PATH;
-		end;
-	end;
-
-	#--------- Homebrew stuff --------#
-
-	#Brew path settings (should be last to alter the PATH)
-	set -xg PATH /usr/local/bin $PATH;
-	set -xg PATH /usr/local/sbin $PATH;
-	set -xg PATH /usr/local/share/python $PATH;
 else;
 	function ls; ls -hl --color $argv; end;
 	function la; ls -ahl --color $argv; end;
@@ -224,3 +228,4 @@ set fish_greeting "
                            \"-(_)-(_)--------(_)--\"
 
 "
+set -xg FISHCONFIGD true
