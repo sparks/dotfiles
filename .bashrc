@@ -24,9 +24,9 @@ if [[ `uname` == 'Darwin' ]]; then
 		if [[ `command -v go` ]]; then
 			if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
 				export GOROOT='/usr/local/opt/go':$GOROOT
-				export GOPATH='/usr/local/share/go':$GOPATH
-				export GOPATH='/Users/sparky/Projects/go':$GOPATH
 				export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
+				export GOPATH='/Users/sparky/Projects/go':$GOPATH
+				export GOPATH='/usr/local/share/go':$GOPATH
 				for i in ${GOPATH//:/ }; do
 					export PATH=$i/bin:$PATH
 				done
