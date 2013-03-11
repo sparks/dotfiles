@@ -35,6 +35,7 @@ if test (uname) = "Darwin";
 
 		#--------- Homebrew stuff --------#
 		#Brew path settings (should be last to alter the PATH)
+		set -xg PATH /usr/local/share/npm/bin $PATH;
 		set -xg PATH /usr/local/bin $PATH;
 		set -xg PATH /usr/local/sbin $PATH;
 		set -xg PATH /usr/local/share/python $PATH;
