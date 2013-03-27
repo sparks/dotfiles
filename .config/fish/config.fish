@@ -26,6 +26,7 @@ if test (uname) = "Darwin";
 			#--------- Go Lang --------#
 			set -xg GOROOT /usr/local/opt/go $GOROOT
 			set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH
+			set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver $GOPATH
 			set -xg GOPATH /Users/sparky/Projects/go $GOPATH
 			set -xg GOPATH /usr/local/share/go $GOPATH
 			for i in $GOPATH;
