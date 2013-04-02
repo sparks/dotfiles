@@ -55,11 +55,9 @@ if test (uname) = "Darwin";
 		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
 	end;
 
-	#if which subl ^&1 >&-;
-		#function s; subl $argv; end;
-	#end;
-
-	function s; open -a Sublime\ Text\ 2 $argv; end;
+	if which subl ^&1 >&-;
+		function s; subl $argv; end;
+	end;
 
 	function ls; ls -hlG $argv; end;
 	function l; ls -hlG $argv; end;
