@@ -58,6 +58,14 @@ if [[ `uname` == 'Darwin' ]]; then
 		alias s='subl'
 	fi
 
+	if [[ `command -v subl2` ]]; then
+		alias s2='subl2'
+	fi
+
+	if [[ `command -v subl3` ]]; then
+		alias s3='subl3'
+	fi
+
 	alias ls='ls -hlG'
 	alias l='ls -hlG'
 	alias la='ls -ahlG'

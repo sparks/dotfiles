@@ -59,6 +59,14 @@ if test (uname) = "Darwin";
 		function s; subl $argv; end;
 	end;
 
+	if which subl2 ^&1 >&-;
+		function s2; subl2 $argv; end;
+	end;
+
+	if which subl3 ^&1 >&-;
+		function s3; subl3 $argv; end;
+	end;
+
 	function ls; ls -hlG $argv; end;
 	function l; ls -hlG $argv; end;
 	function la; ls -ahlG $argv; end;
