@@ -21,6 +21,7 @@
 !.config/fish/completions/*
 !.slate
 !.gemrc
+!.gdbinit
 .config/fish/fishd.*
 .config/fish/fish_history
 
