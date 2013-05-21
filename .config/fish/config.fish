@@ -67,7 +67,7 @@ if test (uname) = "Darwin";
 		function s3; subl3 $argv; end;
 	end;
 
-	function ls; ls -hlG $argv; end;
+	function ls; command ls -hlG $argv; end;
 	function l; ls -hlG $argv; end;
 	function la; ls -ahlG $argv; end;
 
@@ -76,7 +76,7 @@ if test (uname) = "Darwin";
 		screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200;
 	end;
 else;
-	function ls; ls -hl --color $argv; end;
+	function ls; command ls -hl --color $argv; end;
 	function la; ls -ahl --color $argv; end;
 	function l; ls -hl --color $argv; end;
 end;
@@ -227,12 +227,6 @@ function truck -d "Print a truck";
 ";
 end;
 
-set fish_greeting "
-                            _,..=xxxxxxxxxxxx,
-                           /L_Y.=\"\"\"\"\"\"\"\"\"\`,--n.
-            .........      .--\"[=======]|| |  []\\         .........
-    ................       |  _   _     ||   _   |         ................
-                           \"-(_)-(_)--------(_)--\"
+truck;
 
-"
 set -xg FISHCONFIGD true

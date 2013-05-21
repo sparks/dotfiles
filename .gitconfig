@@ -9,10 +9,11 @@
 	status = auto
 	branch = auto
 [alias]
+	br = branch
 	ci = commit
 	co = checkout
 	st = status --short
-	lg = log --oneline --decorate
+	lg = log --oneline --decorate --graph --all
 	unadd = reset HEAD
 [github]
 	user = sparks
