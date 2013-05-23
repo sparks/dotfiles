@@ -25,3 +25,5 @@
 [push]
 	default = matching
 #	default = simple
+[core]
+	editor = vi
