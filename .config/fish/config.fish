@@ -229,4 +229,6 @@ end;
 
 truck;
 
+set fish_greeting ""
+
 set -xg FISHCONFIGD true
