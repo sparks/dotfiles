@@ -34,12 +34,24 @@ if test (uname) = "Darwin";
 			end;
 		end;
 
+		#--------- Android stuff --------#
+
+		if test -d /android/sdk;
+			set -xg PATH $PATH /android/sdk/tools;
+			set -xg PATH $PATH /android/sdk/platform-tools;
+		end;
+
+		if test -d /android/ndk;
+			set -xg PATH $PATH /android/ndk;
+		end;
+
 		#--------- Homebrew stuff --------#
 		#Brew path settings (should be last to alter the PATH)
 		set -xg PATH /usr/local/share/npm/bin $PATH;
 		set -xg PATH /usr/local/bin $PATH;
 		set -xg PATH /usr/local/sbin $PATH;
 		set -xg PATH /usr/local/share/python $PATH;
+
 	end;
 
 	#XTerm (Octave and GnuPlot)

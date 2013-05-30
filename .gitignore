@@ -12,11 +12,8 @@
 !.vimrc
 !.tm_properties
 !.timed
-!.matplotlib
 !.matplotlib/matplotlibrc
-!.config
-!.config/fish
-!.config/fish/*
+!.config/fish/config.fish
 !.config/fish/completions
 !.config/fish/completions/*
 !.slate

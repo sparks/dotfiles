@@ -34,6 +34,17 @@ if [[ `uname` == 'Darwin' ]]; then
 			fi
 		fi
 
+		#--------- Android stuff --------#
+
+		if [[ -d /android/sdk ]]; then
+			export PATH=$PATH:/android/sdk/tools
+			export PATH=$PATH:/android/sdk/platform-tools
+		fi
+
+		if [[ -d /android/ndk ]]; then
+			export PATH=$PATH:/android/ndk
+		fi
+
 		#--------- Homebrew stuff --------#
 
 		#Brew path settings (should be last to alter the PATH)
