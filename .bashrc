@@ -139,6 +139,7 @@ export PS2="$PROMPT_COLOR >\[\e[0m\] "
 
 #--------- Generic Aliases and Shell Stuff --------#
 
+export CC='gcc'
 export EDITOR='vi'
 export AVR_ISP='dragon_isp'
 

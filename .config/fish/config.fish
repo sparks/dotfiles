@@ -155,6 +155,7 @@ end;
 
 #--------- Generic Aliases and Shell Stuff --------#
 
+set -xg CC gcc
 set -xg EDITOR vi
 set -xg AVR_ISP dragon_isp
 
