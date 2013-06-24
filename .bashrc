@@ -227,4 +227,4 @@ alias truck='echo "
 
 export BASHCONFIGD=true
 
-truck #draw a pretty picture
+# truck #draw a pretty picture

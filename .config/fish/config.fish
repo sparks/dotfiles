@@ -240,7 +240,7 @@ function truck -d "Print a truck";
 ";
 end;
 
-truck;
+#truck;
 
 set fish_greeting ""
 
