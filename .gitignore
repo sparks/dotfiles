@@ -20,6 +20,7 @@
 !.gemrc
 !.gdbinit
 !.valgrindrc
+!.sqliterc
 .config/fish/fishd.*
 .config/fish/fish_history
 
