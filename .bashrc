@@ -49,7 +49,7 @@ if [[ `uname` == 'Darwin' ]]; then
 
 		#Brew path settings (should be last to alter the PATH)
 		export PATH=/usr/local/share/npm/bin:$PATH
-		export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
+		# export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 	fi;
 
 	#XTerm (Octave and GnuPlot)
