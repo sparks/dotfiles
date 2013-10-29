@@ -95,6 +95,18 @@ end;
 
 #--------- Oddities --------#
 
+function adb_minuum -d "Get all Minuum adb logcat results";
+	adb logcat | grep --line-buffered -i '^[A-Za-z]/Minuum' | sed -l -E "s/^[A-Za-z]\/Minuum ([^:]*:[0-9]*)\([0-9]*\):(.*)/\1~\2/g" | sed -l -e :a -e "s/^\(.\{1,60\}\)~\(.*\)\$/\1 ~\2/;ta" | sed -l -e "s/\(.*\)~\(.*\)/"(set_color yellow)"\1"(set_color normal)"\2/" | grep --line-buffered -i "$argv";
+end;
+
+function testz
+	if count $argv > 0;
+		echo "yes";
+	else;
+		echo "no";
+	end;
+end;
+
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
 	if which git ^&1 >&-;
 		set -l result (git status --porcelain ^&-);
