@@ -1,58 +1,54 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-if test ! $FISHCONFIGD;
-	set -xg MANPATH (man --path) $MANPATH
-end;
+set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
-	if test ! $FISHCONFIGD;
-		#Crosspack Files
-		if test -d /usr/local/CrossPack-AVR;
-			set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
-			set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
-		end;
-
-		#ARM Compile Tools
-		if test -d /usr/local/arm-cs-tools/bin;
-			set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
-		end;
-
-		#Latex Tools
-		if test -d /usr/texbin;
-			set -xg PATH /usr/texbin $PATH;
-		end;
-
-		if which go ^&1 >&-;
-			#--------- Go Lang --------#
-			set -xg GOROOT /usr/local/opt/go $GOROOT
-			set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH
-			set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver $GOPATH
-			set -xg GOPATH /Users/sparky/Projects/go $GOPATH
-			set -xg GOPATH /usr/local/share/go $GOPATH
-			for i in $GOPATH;
-				set -xg PATH $i/bin $PATH;
-			end;
-		end;
-
-		#--------- Android stuff --------#
-
-		if test -d /android/sdk;
-			set -xg PATH $PATH /android/sdk/tools;
-			set -xg PATH $PATH /android/sdk/platform-tools;
-		end;
-
-		if test -d /android/ndk;
-			set -xg PATH $PATH /android/ndk;
-		end;
-
-		#--------- Homebrew stuff --------#
-		#Brew path settings (should be last to alter the PATH)
-		set -xg PATH /usr/local/share/npm/bin $PATH;
-		set -xg PATH /usr/local/bin $PATH;
-		set -xg PATH /usr/local/sbin $PATH;
-		#set -xg PATH /usr/local/share/python $PATH;
-
+	#Crosspack Files
+	if test -d /usr/local/CrossPack-AVR;
+		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
+		set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
 	end;
+
+	#ARM Compile Tools
+	if test -d /usr/local/arm-cs-tools/bin;
+		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
+	end;
+
+	#Latex Tools
+	if test -d /usr/texbin;
+		set -xg PATH /usr/texbin $PATH;
+	end;
+
+	if which go ^&1 >&-;
+		#--------- Go Lang --------#
+		set -xg GOROOT /usr/local/opt/go;
+		set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH;
+		set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver $GOPATH;
+		set -xg GOPATH /Users/sparky/Projects/go $GOPATH;
+		set -xg GOPATH /Users/sparky/Projects/whirlscape/MinuumWDK/download $GOPATH;
+		set -xg GOPATH /usr/local/share/go $GOPATH;
+		for i in $GOPATH;
+			set -xg PATH $i/bin $PATH;
+		end;
+	end;
+
+	#--------- Android stuff --------#
+
+	if test -d /android/sdk;
+		set -xg PATH $PATH /android/sdk/tools;
+		set -xg PATH $PATH /android/sdk/platform-tools;
+	end;
+
+	if test -d /android/ndk;
+		set -xg PATH $PATH /android/ndk;
+	end;
+
+	#--------- Homebrew stuff --------#
+	#Brew path settings (should be last to alter the PATH)
+	set -xg PATH /usr/local/share/npm/bin $PATH;
+	set -xg PATH /usr/local/bin $PATH;
+	set -xg PATH /usr/local/sbin $PATH;
+	#set -xg PATH /usr/local/share/python $PATH;
 
 	#XTerm (Octave and GnuPlot)
 	set -xg GNUTERM 'x11';
@@ -99,11 +95,11 @@ function adb_minuum -d "Get all Minuum adb logcat results";
 	adb logcat | grep --line-buffered -i '^[A-Za-z]/Minuum' | sed -l -E "s/^[A-Za-z]\/Minuum ([^:]*:[0-9]*)[^:]*:(.*)/\1~\2/g" | sed -l -e :a -e "s/^\(.\{1,60\}\)~\(.*\)\$/\1 ~\2/;ta" | sed -l -e "s/\(.*\)~\(.*\)/"(set_color yellow)"\1"(set_color normal)"\2/" | grep --line-buffered -i "$argv";
 end;
 
-function testz
+function tmp
 	if count $argv > 0;
-		echo "yes";
+		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
 	else;
-		echo "no";
+		echo "tmp requires some files";
 	end;
 end;
 
@@ -255,5 +251,3 @@ end;
 #truck;
 
 set fish_greeting ""
-
-set -xg FISHCONFIGD true

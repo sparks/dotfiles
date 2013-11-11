@@ -1,56 +1,57 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
+export MANPATH=`man --path`:$MANPATH
+
 if [[ `uname` == 'Darwin' ]]; then
-	if [[ -z $BASHCONFIGD ]]; then
-		#Crosspack Files
-		if [[ -d /usr/local/CrossPack-AVR/man ]]; then
-			export MANPATH=/usr/local/CrossPack-AVR/man:$MANPATH
-			export PATH=/usr/local/Crosspack-AVR/bin:$PATH
+	#Crosspack Files
+	if [[ -d /usr/local/CrossPack-AVR/man ]]; then
+		export MANPATH=/usr/local/Crosspack-AVR/man:$MANPATH
+		export PATH=/usr/local/Crosspack-AVR/bin:$PATH
+	fi
+
+	#ARM Compile Tools
+	if [[ -d /usr/local/arm-cs-tools/bin ]]; then
+		export PATH=/usr/local/arm-cs-tools/bin:$PATH
+	fi
+
+	#Latex Tools
+	if [[ -d /usr/texbin ]]; then
+		export PATH=/usr/texbin:$PATH
+	fi
+
+
+	#--------- Go Lang --------#
+
+	if [[ `command -v go` ]]; then
+		if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
+			export GOROOT='/usr/local/opt/go'
+			export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
+			export GOPATH='/Users/sparky/Projects/rter/prototype/videoserver':$GOPATH
+			export GOPATH='/Users/sparky/Projects/go':$GOPATH
+			export GOPATH='/Users/sparky/Projects/whirlscape/MinuumWDK/download':$GOPATH
+			export GOPATH='/usr/local/share/go':$GOPATH
+			for i in ${GOPATH//:/ }; do
+				export PATH=$i/bin:$PATH
+			done
 		fi
+	fi
 
-		#ARM Compile Tools
-		if [[ -d /usr/local/arm-cs-tools/bin ]]; then
-			export PATH=/usr/local/arm-cs-tools/bin:$PATH
-		fi
+	#--------- Android stuff --------#
 
-		#Latex Tools
-		if [[ -d /usr/texbin ]]; then
-			export PATH=/usr/texbin:$PATH
-		fi
+	if [[ -d /android/sdk ]]; then
+		export PATH=$PATH:/android/sdk/tools
+		export PATH=$PATH:/android/sdk/platform-tools
+	fi
 
+	if [[ -d /android/ndk ]]; then
+		export PATH=$PATH:/android/ndk
+	fi
 
-		#--------- Go Lang --------#
+	#--------- Homebrew stuff --------#
 
-		if [[ `command -v go` ]]; then
-			if [[ -d /usr/local/opt/go && -d /usr/local/share/go ]]; then
-				export GOROOT='/usr/local/opt/go':$GOROOT
-				export GOPATH='/Users/sparky/Projects/rter/prototype/server':$GOPATH
-				export GOPATH='/Users/sparky/Projects/rter/prototype/videoserver':$GOPATH
-				export GOPATH='/Users/sparky/Projects/go':$GOPATH
-				export GOPATH='/usr/local/share/go':$GOPATH
-				for i in ${GOPATH//:/ }; do
-					export PATH=$i/bin:$PATH
-				done
-			fi
-		fi
-
-		#--------- Android stuff --------#
-
-		if [[ -d /android/sdk ]]; then
-			export PATH=$PATH:/android/sdk/tools
-			export PATH=$PATH:/android/sdk/platform-tools
-		fi
-
-		if [[ -d /android/ndk ]]; then
-			export PATH=$PATH:/android/ndk
-		fi
-
-		#--------- Homebrew stuff --------#
-
-		#Brew path settings (should be last to alter the PATH)
-		export PATH=/usr/local/share/npm/bin:$PATH
-		# export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
-	fi;
+	#Brew path settings (should be last to alter the PATH)
+	export PATH=/usr/local/share/npm/bin:$PATH
+	# export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
 	#XTerm (Octave and GnuPlot)
 	export GNUTERM='x11'
@@ -224,7 +225,5 @@ alias truck='echo "
 "'
 
 ##### RUN COMMANDS BEFORE START #####
-
-export BASHCONFIGD=true
 
 # truck #draw a pretty picture
