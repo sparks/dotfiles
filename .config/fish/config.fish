@@ -96,7 +96,7 @@ function adb_minuum -d "Get all Minuum adb logcat results";
 end;
 
 function tmp
-	if count $argv > 0;
+	if test (count $argv) -gt 0;
 		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
 	else;
 		echo "tmp requires some files";
