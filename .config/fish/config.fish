@@ -103,6 +103,14 @@ function tmp
 	end;
 end;
 
+function push
+	if test (count $argv) -gt 0;
+		adb push $argv /storage/sdcard0/Download/
+	else;
+		echo "push requires some files";
+	end;
+end;
+
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
 	if which git ^&1 >&-;
 		set -l result (git status --porcelain ^&-);
