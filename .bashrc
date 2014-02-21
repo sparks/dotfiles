@@ -47,6 +47,14 @@ if [[ `uname` == 'Darwin' ]]; then
 		export PATH=$PATH:/android/ndk
 	fi
 
+	if [[ -d /Applications/Android/sdk ]]; then
+		export PATH=$PATH:/Applications/Android/sdk/tools
+		export PATH=$PATH:/Applications/Android/sdk/platform-tools
+	fi
+
+	if [[ -d /Applications/Android/ndk ]]; then
+		export PATH=$PATH:/android/ndk
+	fi
 	#--------- Homebrew stuff --------#
 
 	#Brew path settings (should be last to alter the PATH)
@@ -128,6 +136,8 @@ TEXT_COLOR="\[\e[0;37m\]"
 
 if [[ `uname` == 'Darwin' ]]; then
 	if [[ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C` ]]; then
+		PROMPT_COLOR="\[\e[0;36m\]" #Cyan
+	elif [[ `scutil --get ComputerName | cut -d . -f 1 | grep -i dexter` ]]; then
 		PROMPT_COLOR="\[\e[0;36m\]" #Cyan
 	elif [[ `scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A` ]]; then
 		PROMPT_COLOR="\[\e[0;33m\]" #Yellow

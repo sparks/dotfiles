@@ -43,6 +43,17 @@ if test (uname) = "Darwin";
 		set -xg PATH $PATH /android/ndk;
 	end;
 
+	#--------- Applications Android stuff --------#
+
+	if test -d /Applications/Android/sdk;
+		set -xg PATH $PATH /Applications/Android/sdk/tools;
+		set -xg PATH $PATH /Applications/Android/sdk/platform-tools;
+	end;
+
+	if test -d /Applications/Android/ndk;
+		set -xg PATH $PATH /Applications/Android/ndk;
+	end;
+
 	#--------- Homebrew stuff --------#
 	#Brew path settings (should be last to alter the PATH)
 	set -xg PATH /usr/local/share/npm/bin $PATH;
@@ -144,6 +155,9 @@ set anote_color yellow
 
 if test (uname) = "Darwin";
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C ^&1 >&-
+		set prompt_color cyan;
+	end;
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i dexter ^&1 >&-
 		set prompt_color cyan;
 	end;
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
