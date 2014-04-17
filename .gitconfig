@@ -27,3 +27,5 @@
 #	default = simple
 [core]
 	editor = /usr/bin/vim
+[help]
+	autocorrect = 1
