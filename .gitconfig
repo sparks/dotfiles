@@ -22,7 +22,8 @@
 	browse = yes
 	private = no
 [merge]
-	tool = opendiff
+#	tool = opendiff
+	tool = ksdiff
 [push]
 	default = matching
 #	default = simple

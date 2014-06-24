@@ -109,6 +109,43 @@ function phonecap -d "grab a screen capture from a connected android phone";
 	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
 end;
 
+function aadb
+	set -l avail_devices
+	set -l final_device
+
+	for i in (adb devices | tail -n +2 | tail -r | tail -n +2 | tail -r | awk '{print $1}')
+		set avail_devices $avail_devices $i
+	end
+
+	function prompt_text
+		echo "Please select device index to use: "
+	end
+
+	if test (count $avail_devices) -eq 0
+		echo "No devices connected"
+		exit
+	else if test (count $avail_devices) -gt 1
+		set -l final_device_index -1
+		while test $final_device_index -lt 1 -o $final_device_index -gt (count $avail_devices)
+			echo "Available devices:"
+			for i in (seq (count $avail_devices))
+				echo $i: $avail_devices[$i]
+			end
+			read -l -p prompt_text index
+			set final_device_index $index
+		end
+		set final_device $avail_devices[$final_device_index]
+	else
+		set final_device $avail_devices[1]
+	end
+
+	adb -s $final_device $argv
+end
+
+function office-say -d "Say stuff in the office";
+	ssh office-speakers "say $argv";
+end;
+
 function tmp
 	if test (count $argv) -gt 0;
 		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
