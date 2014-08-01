@@ -142,6 +142,10 @@ function phonecap -d "grab a screen capture from a connected android phone";
 	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
 end;
 
+function norig -d "remove all .orig files in the current directory tree";
+	find ./ -iname "*.orig" -exec rm \{\} \+
+end;
+
 function office-say -d "Say stuff in the office";
 	ssh office-speakers "say $argv";
 end;
