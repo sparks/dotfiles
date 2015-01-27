@@ -154,6 +154,9 @@ end;
 function tmp
 	if test (count $argv) -gt 0;
 		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
+		for arg in $argv
+			echo "http://www.smallbutdigital.com/tmp/$arg"
+		end
 	else;
 		echo "tmp requires some files";
 	end;
