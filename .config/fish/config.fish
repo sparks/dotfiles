@@ -33,13 +33,14 @@ if test (uname) = "Darwin";
 
 	#--------- Android stuff --------#
 
-	if test -d /android/sdk;
-		set -xg PATH $PATH /android/sdk/tools;
-		set -xg PATH $PATH /android/sdk/platform-tools;
+	if test -d /Application/Android/sdk;
+		set -xg PATH $PATH /Application/Android/sdk/tools;
+		set -xg PATH $PATH /Application/Android/sdk/platform-tools;
 	end;
 
-	if test -d /android/ndk;
-		set -xg PATH $PATH /android/ndk;
+	if test -d /Application/Android/ndk;
+		set -xg PATH $PATH /Application/Android/ndk;
+		alias agp /Applications/Android/ndk/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gprof
 	end;
 
 	#--------- Applications Android stuff --------#
