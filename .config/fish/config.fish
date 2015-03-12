@@ -1,5 +1,7 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
+source ~/.config/fish/secrets.fish
+
 set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
@@ -160,6 +162,14 @@ function tmp
 	else;
 		echo "tmp requires some files";
 	end;
+end;
+
+function pushover
+	curl -s \
+	  --form-string "token=aXccxuskjLM5AX2N5Xye9jm7KtDJa4" \
+	  --form-string "user=$PUSH_OVER_USER_TOKEN" \
+	  --form-string "message=$argv" \
+	  https://api.pushover.net/1/messages.json
 end;
 
 function push
