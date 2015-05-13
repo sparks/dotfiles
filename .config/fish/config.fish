@@ -109,7 +109,12 @@ function adb_minuum -d "Get all Minuum adb logcat results";
 end;
 
 function saydle -d "Gradle + say \"done\"";
-	gradle $argv; say "done";
+	gradle $argv;
+	if test $status = 0
+		say -v "Daniel" "Build done"
+	else
+		say -v "Daniel" "Build failed"
+	end
 end
 
 function aadb
