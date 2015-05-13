@@ -117,6 +117,29 @@ function saydle -d "Gradle + say \"done\"";
 	end
 end
 
+function abe;
+	java -jar /usr/local/abe/abe.jar $argv;
+end;
+
+function bakextrak
+	if test -e apps;
+		echo "Directory ./apps already exists and I don't want to overwrite it";
+		return 1;
+	end;
+
+	if test -e $argv;
+		echo "Directory ./$argv already exists and I don't want to overwrite it";
+		return 1;
+	end;
+
+	adb backup $argv -f /tmp/$argv.ab $argv
+	java -jar /usr/local/abe/abe.jar unpack /tmp/$argv.ab /tmp/$argv.tar
+	tar -xf /tmp/$argv.tar
+	mv ./apps/$argv ./
+	rmdir ./apps
+	rm /tmp/$argv.ab /tmp/$argv.tar
+end;
+
 function aadb
 	set -l avail_devices
 	set -l final_device
@@ -131,7 +154,7 @@ function aadb
 
 	if test (count $avail_devices) -eq 0
 		echo "No devices connected"
-		exit
+		return;
 	else if test (count $avail_devices) -gt 1
 		set -l final_device_index -1
 		while test $final_device_index -lt 1 -o $final_device_index -gt (count $avail_devices)
