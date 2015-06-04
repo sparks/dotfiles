@@ -110,11 +110,13 @@ end;
 
 function saydle -d "Gradle + say \"done\"";
 	gradle $argv;
-	if test $status = 0
+	set -l cached_status $status
+	if test $cached_status = 0
 		say -v "Daniel" "Build done"
 	else
 		say -v "Daniel" "Build failed"
 	end
+	return $cached_status
 end
 
 function abe;
