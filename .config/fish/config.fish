@@ -23,14 +23,14 @@ if test (uname) = "Darwin";
 
 	if which go ^&1 >&-;
 		#--------- Go Lang --------#
-		set -xg GOPATH /Users/sparky/Projects/rter/prototype/server $GOPATH;
-		set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver $GOPATH;
-		set -xg GOPATH /Users/sparky/Projects/go $GOPATH;
-		set -xg GOPATH /Users/sparky/Projects/whirlscape/MinuumWDK/download $GOPATH;
-		set -xg GOPATH /usr/local/share/go $GOPATH;
-		for i in $GOPATH;
-			set -xg PATH $i/bin $PATH;
-		end;
+		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/server;
+		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver:$GOPATH;
+		# set -xg GOPATH /Users/sparky/Projects/whirlscape/MinuumWDK/download:$GOPATH;
+		set -xg GOPATH /Users/sparky/Projects/go;
+		set -xg GOPATH /usr/local/share/go:$GOPATH;
+		# for i in $GOPATH;
+		# 	set -xg PATH $i/bin $PATH;
+		# end;
 	end;
 
 	#--------- Android stuff --------#
