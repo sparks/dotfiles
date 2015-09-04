@@ -21,6 +21,7 @@
 !.gdbinit
 !.valgrindrc
 !.sqliterc
+!.ipython/profile_default/static/custom/custom.js
 .config/fish/fishd.*
 .config/fish/fish_history
 
