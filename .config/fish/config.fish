@@ -190,9 +190,12 @@ end;
 function tmp
 	if test (count $argv) -gt 0;
 		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
+		set -l JOIN
 		for arg in $argv
-			echo "http://www.smallbutdigital.com/tmp/$arg"
-		end
+			set JOIN (echo -e "http://www.smallbutdigital.com/tmp/$arg\n$JOIN")
+		end;
+		echo -n $JOIN
+		echo -n $JOIN | pbcopy
 	else;
 		echo "tmp requires some files";
 	end;
