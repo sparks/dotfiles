@@ -175,6 +175,10 @@ function aadb
 	adb -s $final_device $argv
 end
 
+function lilyserver -d "Build lilypond file and open preview wherever file is saved";
+	fswatch $argv | xargs -n1 -I '{}' sh -c "lilypond {}; open /Applications/Preview.app/"
+end;
+
 function phonecap -d "grab a screen capture from a connected android phone";
 	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
 end;
@@ -187,7 +191,7 @@ function office-say -d "Say stuff in the office";
 	ssh office-speakers "say $argv";
 end;
 
-function tmp
+function tmp -d "upload to the tmp dir on my webserver"
 	if test (count $argv) -gt 0;
 		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
 		set -l JOIN
@@ -201,7 +205,7 @@ function tmp
 	end;
 end;
 
-function pushover
+function pushover -d "push notification to my phone"
 	curl -s \
 	  --form-string "token=aXccxuskjLM5AX2N5Xye9jm7KtDJa4" \
 	  --form-string "user=$PUSH_OVER_USER_TOKEN" \
@@ -209,7 +213,7 @@ function pushover
 	  https://api.pushover.net/1/messages.json
 end;
 
-function push
+function push -d "push to /Download on my phone"
 	if test (count $argv) -gt 0;
 		adb push $argv /storage/sdcard0/Download/
 	else;
