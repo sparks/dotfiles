@@ -134,12 +134,13 @@ function bakextrak
 		return 1;
 	end;
 
-	adb backup $argv -f /tmp/$argv.ab $argv
-	java -jar /usr/local/abe/abe.jar unpack /tmp/$argv.ab /tmp/$argv.tar
-	tar -xf /tmp/$argv.tar
+	rm -rf tmp.ab
+	adb backup -f tmp.ab $argv
+	java -jar /usr/local/abe/abe.jar unpack tmp.ab tmp.tar
+	tar -xf tmp.tar
 	mv ./apps/$argv ./
 	rmdir ./apps
-	rm /tmp/$argv.ab /tmp/$argv.tar
+	rm tmp.ab tmp.tar
 end;
 
 function aadb
