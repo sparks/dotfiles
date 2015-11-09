@@ -123,7 +123,7 @@ function abe;
 	java -jar /usr/local/abe/abe.jar $argv;
 end;
 
-function bakextrak
+function bakextrak;
 	if test -e apps;
 		echo "Directory ./apps already exists and I don't want to overwrite it";
 		return 1;
@@ -141,6 +141,16 @@ function bakextrak
 	mv ./apps/$argv ./
 	rmdir ./apps
 	rm tmp.ab tmp.tar
+end;
+
+function layoutbounds;
+	set enable "false"
+	if test (adb shell getprop debug.layout | tr -d "\r\n") = false;
+		set enable "true"
+	end;
+	adb shell setprop debug.layout $enable;
+	adb shell am force-stop (echo $argv | sed "s#/.*##");
+	adb shell am start -n $argv
 end;
 
 function aadb
