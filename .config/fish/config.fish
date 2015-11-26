@@ -145,7 +145,7 @@ end;
 
 function layoutbounds;
 	set enable "false"
-	if test (adb shell getprop debug.layout | tr -d "\r\n") = false;
+	if test (adb shell getprop debug.layout | tr -d "\r\n") = "false";
 		set enable "true"
 	end;
 	adb shell setprop debug.layout $enable;
@@ -196,6 +196,10 @@ end;
 
 function norig -d "remove all .orig files in the current directory tree";
 	find ./ -iname "*.orig" -exec rm \{\} \+
+	find ./ -iname "*_BACKUP_*" -exec rm \{\} \+
+	find ./ -iname "*_BASE_*" -exec rm \{\} \+
+	find ./ -iname "*_LOCAL_*" -exec rm \{\} \+
+	find ./ -iname "*_REMOTE_*" -exec rm \{\} \+
 end;
 
 function office-say -d "Say stuff in the office";
