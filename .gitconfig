@@ -10,6 +10,7 @@
 	branch = auto
 [alias]
 	br = branch
+	brm = branch -a --merged
 	ci = commit
 	co = checkout
 	st = status --short
