@@ -29,6 +29,7 @@
 #	default = simple
 [core]
 	editor = /usr/bin/vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
