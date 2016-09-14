@@ -53,6 +53,7 @@ if test (uname) = "Darwin";
 	if test -d /Applications/Android/sdk;
 		set -xg PATH $PATH /Applications/Android/sdk/tools;
 		set -xg PATH $PATH /Applications/Android/sdk/platform-tools;
+		set -xg PATH $PATH /Applications/Android/sdk/build-tools/23.0.3;
 	end;
 
 	if test -d /Applications/Android/ndk;
