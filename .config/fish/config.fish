@@ -123,6 +123,17 @@ function saydle -d "Gradle + say \"done\"";
 	return $cached_status
 end
 
+function sals -d "sls + say \"deployed\"";
+	sls $argv;
+	set -l cached_status $status
+	if test $cached_status = 0
+		say -v "Daniel" "Serverless deployed"
+	else
+		say -v "Daniel" "Serverless failed"
+	end
+	return $cached_status
+end
+
 function abe;
 	java -jar /usr/local/abe/abe.jar $argv;
 end;
