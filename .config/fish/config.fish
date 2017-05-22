@@ -8,20 +8,11 @@ set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-p
 set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
-	#Crosspack Files
-	if test -d /usr/local/CrossPack-AVR;
-		set -xg MANPATH /usr/local/CrossPack-AVR/man $MANPATH;
-		set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
-	end;
-
-	#ARM Compile Tools
-	if test -d /usr/local/arm-cs-tools/bin;
-		set -xg PATH /usr/local/arm-cs-tools/bin $PATH;
-	end;
-
 	#Latex Tools
-	if test -d /usr/texbin;
-		set -xg PATH /usr/texbin $PATH;
+	if test -d /usr/local/esp;
+		set -xg PATH /usr/local/esp/toolchain/xtensa-esp32-elf/bin/ $PATH;
+		set -xg PATH /usr/local/esp/toolchain/bin/ $PATH;
+		set -xg IDF_PATH /usr/local/esp/esp-idf/;
 	end;
 
 	if which go ^&1 >&-;
