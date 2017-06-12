@@ -2,6 +2,7 @@
 
 !.bash_profile
 !.bashrc
+!.avrduderc
 !.gitconfig
 !.gitignore
 !.osx
