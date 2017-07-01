@@ -305,6 +305,15 @@ function fish_prompt;
 	set_color normal;
 end;
 
+function night;
+	pmset displaysleepnow
+end;
+
+function timer;
+	utimer -c $argv[1]m;
+	say $argv[2..-1];
+end;
+
 #--------- Generic Aliases and Shell Stuff --------#
 
 set -xg CC gcc
