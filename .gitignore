@@ -22,10 +22,6 @@
 !.gdbinit
 !.valgrindrc
 !.sqliterc
-!.ipython/profile_default/static/custom/custom.js
-!.ipython/profile_default/startup/clip.py
-!.ipython/profile_default/ipython_config.py
-!.ipython/extensions/*.py
 .config/fish/fishd.*
 .config/fish/fish_history
 
