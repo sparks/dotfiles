@@ -285,6 +285,9 @@ if test (uname) = "Darwin";
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
 		set prompt_color yellow;
 	end;
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i ornette ^&1 >&-
+		set prompt_color A0FF33;
+	end;
 end;
 
 function fish_prompt;
