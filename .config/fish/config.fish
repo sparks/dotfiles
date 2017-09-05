@@ -279,14 +279,11 @@ if test (uname) = "Darwin";
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C ^&1 >&-
 		set prompt_color cyan;
 	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i dexter ^&1 >&-
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "(dexter|ornette)" ^&1 >&-
 		set prompt_color cyan;
 	end;
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
 		set prompt_color yellow;
-	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i ornette ^&1 >&-
-		set prompt_color A0FF33;
 	end;
 end;
 
