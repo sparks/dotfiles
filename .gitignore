@@ -16,7 +16,6 @@
 !.config/fish/config.fish
 !.config/fish/completions
 !.config/fish/completions/*
-!.slate
 !.gemrc
 !.gdbinit
 !.valgrindrc
