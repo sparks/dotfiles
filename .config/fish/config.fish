@@ -27,28 +27,26 @@ if test (uname) = "Darwin";
 		# end;
 	end;
 
-	#--------- Android stuff --------#
-
-	if test -d /Application/Android/sdk;
-		set -xg PATH $PATH /Application/Android/sdk/tools;
-		set -xg PATH $PATH /Application/Android/sdk/platform-tools;
-	end;
-
-	if test -d /Application/Android/ndk;
-		set -xg PATH $PATH /Application/Android/ndk;
-		alias agp /Applications/Android/ndk/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gprof
-	end;
-
 	#--------- Applications Android stuff --------#
 
 	if test -d /Applications/Android/sdk;
 		set -xg PATH $PATH /Applications/Android/sdk/tools;
 		set -xg PATH $PATH /Applications/Android/sdk/platform-tools;
-		set -xg PATH $PATH /Applications/Android/sdk/build-tools/23.0.3;
+		set -xg PATH $PATH /Applications/Android/sdk/build-tools/26.0.1;
 	end;
 
 	if test -d /Applications/Android/ndk;
 		set -xg PATH $PATH /Applications/Android/ndk;
+	end;
+
+	if test -d /Users/sparky/Library/Android/sdk;
+		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/tools;
+		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/platform-tools;
+		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/build-tools/26.0.1;
+	end;
+
+	if test -d /Users/sparky/Library/Android/sdk/ndk-bundle;
+		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/ndk-bundle;
 	end;
 
 	#--------- Homebrew stuff --------#
@@ -199,7 +197,8 @@ function lilyserver -d "Build lilypond file and open preview wherever file is sa
 end;
 
 function phonecap -d "grab a screen capture from a connected android phone";
-	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
+	# adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
+	adb shell screencap -p > $argv;
 end;
 
 function norig -d "remove all .orig files in the current directory tree";
