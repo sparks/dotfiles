@@ -62,6 +62,9 @@ if test (uname) = "Darwin";
 		set -xg SVN_MERGE fmdiff;
 	end;
 
+	set -xg KERAS_BACKEND theano
+	set -xg DISAMBIGTOOLS ~/Projects/whirlscape/disambigtools/
+
 	#Mac Aliases
 	if test -x /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE;
 		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
