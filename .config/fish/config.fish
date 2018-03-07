@@ -8,6 +8,9 @@ set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-p
 set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
+
+	set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
+	
 	#Latex Tools
 	if test -d /usr/local/esp;
 		set -xg PATH /usr/local/esp/toolchain/xtensa-esp32-elf/bin/ $PATH;
