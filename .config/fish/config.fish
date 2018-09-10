@@ -57,6 +57,8 @@ if test (uname) = "Darwin";
 	set -xg PATH /usr/local/bin $PATH;
 	#set -xg PATH /usr/local/share/python $PATH;
 
+	set -xg PATH (pyenv root)/shims $PATH
+
 	#XTerm (Octave and GnuPlot)
 	set -xg GNUTERM 'x11';
 
@@ -110,6 +112,15 @@ end;
 
 function findrm -d "delete files in subdirs using find";
 	find ./ -iname "$argv" -exec rm \{\} \;;
+end;
+
+function gerbermv -d "reorganize gerber files after an eagle cam job";
+	mkdir gerber
+	rm ./*.*#*
+	mv ./* gerber
+	mv gerber/*.sch gerber/*.brd .
+	rm gerber/*.dri gerber/*.gpi
+	cp ~/Projects/md/gerber/README.txt ./gerber
 end;
 
 function adb_minuum -d "Get all Minuum adb logcat results";
