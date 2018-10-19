@@ -77,10 +77,12 @@ if test (uname) = "Darwin";
 
 	if which subl ^&1 >&-;
 		function s;
-			for result in (find $argv -iname "*.sublime-project" -maxdepth 1 | head -n 1)
-	            subl $result
-	            return 0;
-	        end
+			if test -d $argv[1];
+				for result in (find $argv[1] -iname "*.sublime-project" -maxdepth 1 | head -n 1)
+		            subl $result
+		            return 0;
+		        end
+		    end;
 	        
 			subl $argv;
 		end;
