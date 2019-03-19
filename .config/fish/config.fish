@@ -1,6 +1,8 @@
 #--------- Mac vs Non-Mac ENV Variables --------#
 
-source ~/.config/fish/secrets.fish
+if test -f ~/.config/fish/secrets.fish;
+	source ~/.config/fish/secrets.fish
+end;
 
 set -xg WHIRLSCAPE_KEYSTORE /Users/sparky/Documents/Whirlscape/keystores/whirlscape.keystore
 set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-play-key.p12
@@ -57,7 +59,9 @@ if test (uname) = "Darwin";
 	set -xg PATH /usr/local/bin $PATH;
 	#set -xg PATH /usr/local/share/python $PATH;
 
-	set -xg PATH (pyenv root)/shims $PATH
+	if which pyenv ^&1 >&-;
+		set -xg PATH (pyenv root)/shims $PATH
+	end;
 
 	#XTerm (Octave and GnuPlot)
 	set -xg GNUTERM 'x11';
