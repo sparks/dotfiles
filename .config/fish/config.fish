@@ -5,6 +5,8 @@ source ~/.config/fish/secrets.fish
 set -xg WHIRLSCAPE_KEYSTORE /Users/sparky/Documents/Whirlscape/keystores/whirlscape.keystore
 set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-play-key.p12
 
+set -xg HEADSPIN_HOME /Users/sparky/Projects/contract/headspin/
+
 set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
