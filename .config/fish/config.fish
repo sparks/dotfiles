@@ -7,7 +7,7 @@ end;
 set -xg WHIRLSCAPE_KEYSTORE /Users/sparky/Documents/Whirlscape/keystores/whirlscape.keystore
 set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-play-key.p12
 
-set -xg HEADSPIN_HOME /Users/sparky/Projects/contract/headspin/
+set -xg HEADSPIN_HOME /Users/sparky/headspinio
 
 set -xg MANPATH (man --path) $MANPATH
 
@@ -62,7 +62,11 @@ if test (uname) = "Darwin";
 	#set -xg PATH /usr/local/share/python $PATH;
 
 	if which pyenv ^&1 >&-;
-		set -xg PATH (pyenv root)/shims $PATH
+		set -xg PYENV_VIRTUALENV_DISABLE_PROMPT 1;
+		set -xg PYENV_ROOT (pyenv root);
+		status --is-interactive; and source (pyenv virtualenv-init -|psub);
+		status --is-interactive; and source (pyenv init -|psub);
+		# set -xg PATH (pyenv root)/shims $PATH
 	end;
 
 	#XTerm (Octave and GnuPlot)
@@ -322,6 +326,12 @@ if test (uname) = "Darwin";
 end;
 
 function fish_prompt;
+
+	if set -q VIRTUAL_ENV
+		set_color yellow;
+		printf "(%s) " (basename "$VIRTUAL_ENV");
+	end
+
 	set_color $prompt_color;
 
 	if test (uname) = "Darwin";
