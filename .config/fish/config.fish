@@ -7,7 +7,7 @@ end;
 set -xg WHIRLSCAPE_KEYSTORE /Users/sparky/Documents/Whirlscape/keystores/whirlscape.keystore
 set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-play-key.p12
 
-set -xg HEADSPIN_HOME /Users/sparky/headspinio
+set -xg HEADSPIN_HOME /Users/sparky/headspinio;
 
 set -xg MANPATH (man --path) $MANPATH
 
@@ -271,7 +271,7 @@ function pushover -d "push notification to my phone"
 	  https://api.pushover.net/1/messages.json
 end;
 
-function push -d "push to /Download on my phone"
+function adbpush -d "push to /Download on my phone"
 	if test (count $argv) -gt 0;
 		adb push $argv /storage/sdcard0/Download/
 	else;
