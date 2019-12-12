@@ -129,10 +129,11 @@ end;
 function gerbermv -d "reorganize gerber files after an eagle cam job";
 	mkdir gerber
 	rm ./*.*#*
-	mv ./* gerber
+	mv ./*.* gerber
 	mv gerber/*.sch gerber/*.brd .
 	rm gerber/*.dri gerber/*.gpi
 	cp ~/Projects/md/gerber/README.txt ./gerber
+	gerbv gerber/*
 end;
 
 function adb_minuum -d "Get all Minuum adb logcat results";
