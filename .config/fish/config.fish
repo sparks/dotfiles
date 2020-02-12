@@ -372,6 +372,10 @@ end;
 function ..; cd ..; end;
 function c; clear; end;
 function p; cd ~/Projects/; end;
+function hs;
+	cd ~/headspinio/;
+	source activate.fish
+end;
 
 #avrdude
 if which avrdude ^&1 >&-;
