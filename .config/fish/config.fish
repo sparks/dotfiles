@@ -377,6 +377,11 @@ function hs;
 	source activate.fish
 end;
 
+function hsi;
+	cd ~/Projects/contract/headspin;
+end;
+
+
 #avrdude
 if which avrdude ^&1 >&-;
 	function usbasp; avrdude -c usbasp -P usb $argv; end;
