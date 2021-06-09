@@ -63,10 +63,13 @@ if test (uname) = "Darwin";
 	#set -xg PATH /usr/local/share/python $PATH;
 
 	if which pyenv ^&1 >&-;
-		set -xg PYENV_VIRTUALENV_DISABLE_PROMPT 1;
-		set -xg PYENV_ROOT (pyenv root);
-		status --is-interactive; and source (pyenv virtualenv-init -|psub);
-		status --is-interactive; and source (pyenv init -|psub);
+		status is-login; and pyenv init --path | source
+		pyenv init - | source
+
+		# set -xg PYENV_VIRTUALENV_DISABLE_PROMPT 1;
+		# set -xg PYENV_ROOT (pyenv root);
+		# status --is-interactive; and source (pyenv virtualenv-init -|psub);
+		# status --is-interactive; and source (pyenv init -|psub);
 		# set -xg PATH (pyenv root)/shims $PATH
 	end;
 
@@ -78,8 +81,8 @@ if test (uname) = "Darwin";
 		set -xg SVN_MERGE fmdiff;
 	end;
 
-	set -xg KERAS_BACKEND theano
-	set -xg DISAMBIGTOOLS ~/Projects/whirlscape/disambigtools/
+	# set -xg KERAS_BACKEND theano
+	# set -xg DISAMBIGTOOLS ~/Projects/whirlscape/disambigtools/
 
 	#Mac Aliases
 	if test -x /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE;
