@@ -32,10 +32,10 @@
 [core]
 	editor = /usr/bin/vim
 	pager = diff-so-fancy | less --tabs=4 -RFX
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
-	process = git-lfs filter-process --skip
-	required = true
 [pull]
 	ff = only
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

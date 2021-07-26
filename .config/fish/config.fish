@@ -250,6 +250,13 @@ function norig -d "remove all .orig files in the current directory tree";
 	find ./ -iname "*_REMOTE_*" -exec rm \{\} \+
 end;
 
+function lfsfix -d "Fix broken LFS file pointers, WARNING will reset hard";
+	git lfs uninstall
+	git reset --hard
+	git lfs install
+	git lfs pull
+end;
+
 function office-say -d "Say stuff in the office";
 	ssh office-speakers "say $argv";
 end;
