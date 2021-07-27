@@ -22,7 +22,7 @@ if test (uname) = "Darwin";
 		set -xg IDF_PATH /usr/local/esp/esp-idf/;
 	end;
 
-	if which go ^&1 >&-;
+	if type -q go;
 		#--------- Go Lang --------#
 		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/server;
 		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver:$GOPATH;
@@ -62,7 +62,7 @@ if test (uname) = "Darwin";
 	set -xg PATH /usr/local/sbin $PATH;
 	#set -xg PATH /usr/local/share/python $PATH;
 
-	if which pyenv ^&1 >&-;
+	if type -q pyenv;
 		status is-login; and pyenv init --path | source
 		pyenv init - | source
 
@@ -77,7 +77,7 @@ if test (uname) = "Darwin";
 	set -xg GNUTERM 'x11';
 
 	#SVN diff/merge tool
-	if which fmdiff ^&1 >&-;
+	if type -q fmdiff;
 		set -xg SVN_MERGE fmdiff;
 	end;
 
@@ -89,7 +89,7 @@ if test (uname) = "Darwin";
 		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
 	end;
 
-	if which subl ^&1 >&-;
+	if type -q subl;
 		function s;
 			if test -d $argv[1];
 				for result in (find "$argv[1]" -iname "*.sublime-project" -maxdepth 1 | head -n 1)
@@ -102,11 +102,11 @@ if test (uname) = "Darwin";
 		end;
 	end;
 
-	if which subl2 ^&1 >&-;
+	if type -q subl2;
 		function s2; subl2 $argv; end;
 	end;
 
-	if which subl3 ^&1 >&-;
+	if type -q subl3;
 		function s3; subl3 $argv; end;
 	end;
 
@@ -292,7 +292,7 @@ function adbpush -d "push to /Download on my phone"
 end;
 
 function parse_git_dirty -d "Return a marker if inside a dirty git repo";
-	if which git ^&1 >&-;
+	if type -q git;
 		set -l result (git status --porcelain ^&-);
 		if test -n "$result";
 			printf "☐";
@@ -301,14 +301,14 @@ function parse_git_dirty -d "Return a marker if inside a dirty git repo";
 end;
 
 function parse_git_branch -d "Return branch name if inside a git repo and the master branch is not checked out";
-	if which git ^&1 >&-;
+	if type -q git;
 		set -l branch (git branch ^&- | awk '($1 ~ /\*/) && ($2 !~ /master/) {for(i=2;i<=NF;i++) {{printf "%s%s", (i>2?" ":""), $i}}}');
 		printf "%s" $branch;
 	end;
 end;
 
 function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
-	if which svn ^&1 >&-;
+	if type -q svn;
 		set -l result (svn status ^&-);
 		if test -n "$result";
 			printf "■";
@@ -323,16 +323,16 @@ set text_color white
 set anote_color yellow
 
 if test (uname) = "Darwin";
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C ^&1 >&-
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C -q;
 		set prompt_color cyan;
 	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "dexter" ^&1 >&-
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "dexter" -q;
 		set prompt_color ff8402;
 	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "ornette" ^&1 >&-
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "ornette" -q;
 		set prompt_color cyan;
 	end;
-	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A ^&1 >&-;
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0A -q;;
 		set prompt_color yellow;
 	end;
 end;
@@ -376,7 +376,7 @@ set -xg CC gcc
 set -xg EDITOR vi
 set -xg AVR_ISP dragon_isp
 
-if which avrdude ^&1 >&-;
+if type -q avrdude;
 	function vi; vim $argv; end;
 end;
 
@@ -394,7 +394,7 @@ end;
 
 
 #avrdude
-if which avrdude ^&1 >&-;
+if type -q avrdude;
 	function usbasp; avrdude -c usbasp -P usb $argv; end;
 	function usbtiny; avrdude -c usbtiny -P usb $argv; end;
 	function mk2; avrdude -c avrispmkII -P usb $argv; end;
