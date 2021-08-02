@@ -20,6 +20,7 @@
 !.gdbinit
 !.valgrindrc
 !.sqliterc
+!.pylintrc
 .config/fish/fishd.*
 .config/fish/fish_history
 
