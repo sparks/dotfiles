@@ -12,81 +12,20 @@ set -xg HEADSPIN_HOME /Users/sparky/headspinio;
 set -xg MANPATH (man --path) $MANPATH
 
 if test (uname) = "Darwin";
+	set -xg PATH "/Applications/Sublime Text.app/Contents/SharedSupport/bin" $PATH;
 
-	set -xg PATH /usr/local/CrossPack-AVR/bin $PATH;
+	set -xg PATH /Users/sparky/Library/Android/sdk/platform-tools $PATH;
 	
-	#Latex Tools
-	if test -d /usr/local/esp;
-		set -xg PATH /usr/local/esp/toolchain/xtensa-esp32-elf/bin/ $PATH;
-		set -xg PATH /usr/local/esp/toolchain/bin/ $PATH;
-		set -xg IDF_PATH /usr/local/esp/esp-idf/;
-	end;
-
-	if type -q go;
-		#--------- Go Lang --------#
-		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/server;
-		# set -xg GOPATH /Users/sparky/Projects/rter/prototype/videoserver:$GOPATH;
-		# set -xg GOPATH /Users/sparky/Projects/whirlscape/MinuumWDK/download:$GOPATH;
-		set -xg GOPATH /Users/sparky/Projects/go;
-		set -xg GOPATH /usr/local/share/go:$GOPATH;
-		# for i in $GOPATH;
-		# 	set -xg PATH $i/bin $PATH;
-		# end;
-	end;
-
-	#--------- Applications Android stuff --------#
-
-	if test -d /Applications/Android/sdk;
-		set -xg PATH $PATH /Applications/Android/sdk/tools;
-		set -xg PATH $PATH /Applications/Android/sdk/platform-tools;
-		set -xg PATH $PATH /Applications/Android/sdk/build-tools/26.0.1;
-	end;
-
-	if test -d /Applications/Android/ndk;
-		set -xg PATH $PATH /Applications/Android/ndk;
-	end;
-
-	if test -d /Users/sparky/Library/Android/sdk;
-		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/tools;
-		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/platform-tools;
-		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/build-tools/26.0.1;
-	end;
-
-	if test -d /Users/sparky/Library/Android/sdk/ndk-bundle;
-		set -xg PATH $PATH /Users/sparky/Library/Android/sdk/ndk-bundle;
-	end;
-
-	#--------- Homebrew stuff --------#
 	#Brew path settings (should be last to alter the PATH)
-	set -xg PATH /usr/local/bin $PATH;
-	set -xg PATH /usr/local/sbin $PATH;
-	#set -xg PATH /usr/local/share/python $PATH;
+	set -xg PATH /opt/homebrew/bin $PATH;
+	set -xg PATH /opt/homebrew//sbin $PATH;
+
+	set -xg PATH /opt/homebrew/opt/mysql@5.7/bin $PATH;
+
 
 	if type -q pyenv;
 		status is-login; and pyenv init --path | source
 		pyenv init - | source
-
-		# set -xg PYENV_VIRTUALENV_DISABLE_PROMPT 1;
-		# set -xg PYENV_ROOT (pyenv root);
-		# status --is-interactive; and source (pyenv virtualenv-init -|psub);
-		# status --is-interactive; and source (pyenv init -|psub);
-		# set -xg PATH (pyenv root)/shims $PATH
-	end;
-
-	#XTerm (Octave and GnuPlot)
-	set -xg GNUTERM 'x11';
-
-	#SVN diff/merge tool
-	if type -q fmdiff;
-		set -xg SVN_MERGE fmdiff;
-	end;
-
-	# set -xg KERAS_BACKEND theano
-	# set -xg DISAMBIGTOOLS ~/Projects/whirlscape/disambigtools/
-
-	#Mac Aliases
-	if test -x /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE;
-		function eagle; /Applications/EAGLE/EAGLE.app/Contents/MacOS/EAGLE&; end;
 	end;
 
 	if type -q subl;
@@ -102,22 +41,10 @@ if test (uname) = "Darwin";
 		end;
 	end;
 
-	if type -q subl2;
-		function s2; subl2 $argv; end;
-	end;
-
-	if type -q subl3;
-		function s3; subl3 $argv; end;
-	end;
-
 	function ls; command ls -hlG $argv; end;
 	function l; ls -hlG $argv; end;
 	function la; ls -ahlG $argv; end;
 
-	#Screen
-	function pirate; 
-		screen -t "BusPirate" /dev/tty.usbserial-A700e6Gc 115200;
-	end;
 else;
 	function ls; command ls -hl --color $argv; end;
 	function la; ls -ahl --color $argv; end;
@@ -138,66 +65,6 @@ function gerbermv -d "reorganize gerber files after an eagle cam job";
 	rm gerber/*.dri gerber/*.gpi
 	cp ~/Projects/md/gerber/README.txt ./gerber
 	gerbv gerber/*
-end;
-
-function adb_minuum -d "Get all Minuum adb logcat results";
-	adb logcat | grep --line-buffered -i '^[A-Za-z]/Minuum' | sed -l -E "s/^[A-Za-z]\/Minuum ([^:]*:[0-9]*)[^:]*:(.*)/\1~\2/g" | sed -l -e :a -e "s/^\(.\{1,60\}\)~\(.*\)\$/\1 ~\2/;ta" | sed -l -e "s/\(.*\)~\(.*\)/"(set_color yellow)"\1"(set_color normal)"\2/" | grep --line-buffered -i "$argv";
-end;
-
-function saydle -d "Gradle + say \"done\"";
-	gradle $argv;
-	set -l cached_status $status
-	if test $cached_status = 0
-		say -v "Daniel" "Build done"
-	else
-		say -v "Daniel" "Build failed"
-	end
-	return $cached_status
-end
-
-function sals -d "sls + say \"deployed\"";
-	sls $argv;
-	set -l cached_status $status
-	if test $cached_status = 0
-		say -v "Daniel" "Serverless deployed"
-	else
-		say -v "Daniel" "Serverless failed"
-	end
-	return $cached_status
-end
-
-function abe;
-	java -jar /usr/local/abe/abe.jar $argv;
-end;
-
-function bakextrak;
-	if test -e apps;
-		echo "Directory ./apps already exists and I don't want to overwrite it";
-		return 1;
-	end;
-
-	if test -e $argv;
-		echo "Directory ./$argv already exists and I don't want to overwrite it";
-		return 1;
-	end;
-
-	rm -rf tmp.ab
-	adb backup -f tmp.ab $argv
-	java -jar /usr/local/abe/abe.jar unpack tmp.ab tmp.tar
-	tar -xf tmp.tar
-	mv ./apps/$argv ./
-	rmdir ./apps
-	rm tmp.ab tmp.tar
-end;
-
-function layoutbounds;
-	set enable "false"
-	if test (adb shell getprop debug.layout | tr -d "\r\n") = "false";
-		set enable "true"
-	end;
-	adb shell setprop debug.layout $enable;
-	adb shell am force-stop (echo $argv | sed "s#/.*##");
-	adb shell am start -n $argv
 end;
 
 function aadb
@@ -233,10 +100,6 @@ function aadb
 	adb -s $final_device $argv
 end
 
-function lilyserver -d "Build lilypond file and open preview wherever file is saved";
-	fswatch $argv | xargs -n1 -I '{}' sh -c "lilypond {}; open /Applications/Preview.app/"
-end;
-
 function phonecap -d "grab a screen capture from a connected android phone";
 	# adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $argv;
 	adb shell screencap -p > $argv;
@@ -255,10 +118,6 @@ function lfsfix -d "Fix broken LFS file pointers, WARNING will reset hard";
 	git reset --hard
 	git lfs install
 	git lfs pull
-end;
-
-function office-say -d "Say stuff in the office";
-	ssh office-speakers "say $argv";
 end;
 
 function tmp -d "upload to the tmp dir on my webserver"
@@ -307,15 +166,6 @@ function parse_git_branch -d "Return branch name if inside a git repo and the ma
 	end;
 end;
 
-function parse_svn_dirty -d "Return a marker if inside a dirty svn repo";
-	if type -q svn;
-		set -l result (svn status ^&-);
-		if test -n "$result";
-			printf "■";
-		end;
-	end;
-end;
-
 #--------- Prompt --------#
 
 set prompt_color red
@@ -323,6 +173,9 @@ set text_color white
 set anote_color yellow
 
 if test (uname) = "Darwin";
+	if scutil --get ComputerName | cut -d . -f 1 | grep -i -E "sonny" -q;
+		set prompt_color yellow
+	end;
 	if scutil --get ComputerName | cut -d . -f 1 | grep -i 0x0C -q;
 		set prompt_color cyan;
 	end;
@@ -338,7 +191,6 @@ if test (uname) = "Darwin";
 end;
 
 function fish_prompt;
-
 	if set -q VIRTUAL_ENV
 		set_color yellow;
 		printf "(%s) " (basename "$VIRTUAL_ENV");
@@ -361,10 +213,6 @@ function fish_prompt;
 	set_color normal;
 end;
 
-function night;
-	pmset displaysleepnow
-end;
-
 function timer;
 	utimer -c $argv[1]m;
 	say $argv[2..-1];
@@ -372,17 +220,13 @@ end;
 
 #--------- Generic Aliases and Shell Stuff --------#
 
-set -xg CC gcc
 set -xg EDITOR vi
 set -xg AVR_ISP dragon_isp
-
-if type -q avrdude;
-	function vi; vim $argv; end;
-end;
 
 function ..; cd ..; end;
 function c; clear; end;
 function p; cd ~/Projects/; end;
+
 function hs;
 	cd ~/headspinio/;
 	source activate.fish
@@ -470,9 +314,3 @@ end;
 
 set fish_greeting ""
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.fish ]; and . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.fish
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish ]; and . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish
