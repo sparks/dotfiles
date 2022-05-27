@@ -17,10 +17,11 @@ if test (uname) = "Darwin";
 	set -xg PATH /Users/sparky/Library/Android/sdk/platform-tools $PATH;
 	
 	#Brew path settings (should be last to alter the PATH)
-	set -xg PATH /opt/homebrew/bin $PATH;
-	set -xg PATH /opt/homebrew//sbin $PATH;
+	# set -xg PATH /opt/homebrew/bin $PATH;
+	# set -xg PATH /opt/homebrew//sbin $PATH;
 
-	set -xg PATH /opt/homebrew/opt/mysql@5.7/bin $PATH;
+	# set -xg PATH /opt/homebrew/opt/mysql@5.7/bin $PATH;
+	/opt/homebrew/bin/brew shellenv | source
 
 
 	if type -q pyenv;
@@ -44,6 +45,10 @@ if test (uname) = "Darwin";
 	function ls; command ls -hlG $argv; end;
 	function l; ls -hlG $argv; end;
 	function la; ls -ahlG $argv; end;
+
+	function tclip -d "Copy tmux clipboard to system clipboard";
+		tmux showb | pbcopy
+	end;
 
 else;
 	function ls; command ls -hl --color $argv; end;
