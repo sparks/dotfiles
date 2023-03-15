@@ -110,6 +110,23 @@ function phonecap -d "grab a screen capture from a connected android phone";
 	adb shell screencap -p > $argv;
 end;
 
+function diffsettings -d "diff android settings for a device";
+	rm tmp_a tmp_b
+	touch tmp_a tmp_b
+
+	adb shell settings list system >> tmp_a
+	adb shell settings list global >> tmp_a
+	adb shell settings list secure >> tmp_a
+
+	read
+
+	adb shell settings list system >> tmp_b
+	adb shell settings list global >> tmp_b
+	adb shell settings list secure >> tmp_b
+	diff tmp_a tmp_b
+end;
+
+
 function norig -d "remove all .orig files in the current directory tree";
 	find ./ -iname "*.orig" -exec rm \{\} \+
 	find ./ -iname "*_BACKUP_*" -exec rm \{\} \+
