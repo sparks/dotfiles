@@ -26,8 +26,8 @@
 [merge]
 	tool = opendiff
 [push]
-	default = matching
-	#default = simple
+	#default = matching
+	default = simple
 
 [core]
 	editor = /usr/bin/vim
