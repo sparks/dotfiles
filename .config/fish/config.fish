@@ -9,7 +9,7 @@ set -xg WHIRLSCAPE_P12 /Users/sparky/Documents/Whirlscape/keystores/whirlscape-p
 
 set -xg HEADSPIN_HOME /Users/sparky/headspinio;
 
-set -xg MANPATH (man --path) $MANPATH
+set -xg MANPATH (manpath) $MANPATH
 
 if test (uname) = "Darwin";
 	set -xg PATH "/Applications/Sublime Text.app/Contents/SharedSupport/bin" $PATH;
