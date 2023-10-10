@@ -144,7 +144,7 @@ end;
 
 function tmp -d "upload to the tmp dir on my webserver"
 	if test (count $argv) -gt 0;
-		scp -r $argv sbd:~/domains/smallbutdigital.com/html/tmp
+		scp -r $argv sbd:/home/vu4yrpgtwq89/www/tmp/
 		set -l JOIN
 		for arg in $argv
 			set JOIN (echo -e "http://www.smallbutdigital.com/tmp/$arg\n$JOIN")
